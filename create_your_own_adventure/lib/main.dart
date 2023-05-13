@@ -55,7 +55,7 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: FlatButton(
+                child: MaterialButton(
                   onPressed: () {
                     //Choice 1 made by user.
                     //TODO: Step 18 - Call the nextStory() method from storyBrain and pass the number 1 as the choice made by the user.
@@ -80,11 +80,11 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this FlatButton.
+                //TODO: Step 26 - Use a Flutter Visibility Widget to wrap this MaterialButton.
                 //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
                 child: Visibility(
                   visible: obj.buttonShouldBeVisible(),
-                  child: FlatButton(
+                  child: MaterialButton(
                     onPressed: () {
                       //Choice 2 made by user.
                       //TODO: Step 19 - Call the nextStory() method from storyBrain and pass the number 2 as the choice made by the user.

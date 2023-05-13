@@ -19,7 +19,7 @@ class _XylophoneAppState extends State<XylophoneApp> {
 
   Widget makeTile(int num, Color color) {
     return Expanded(
-      child: RaisedButton(
+      child: MaterialButton(
         color: color,
         onPressed: () {
           playSound(num);
