@@ -1,6 +1,0 @@
-
-PRODUCT_NAME = getx_tutorial
-
-PRODUCT_BUNDLE_IDENTIFIER = com.example.getxTutorial
-
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
