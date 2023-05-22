@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // APIs.showSnackBar();
-                  APIs.showDialog();
+                  // APIs.showDialog();
+                  APIs.getXBottomSheet();
                 },
                 child: const Text('Click me'),
               )

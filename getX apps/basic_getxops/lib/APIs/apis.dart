@@ -68,4 +68,54 @@ class APIs {
       // barrierDismissible: false //!allow barrier to dismiss
     );
   }
+
+  static Future<dynamic> getXBottomSheet() {
+    return Get.bottomSheet(
+        Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(
+                Icons.light_mode_outlined,
+                color: Colors.white,
+              ),
+              title: const Text(
+                'Light Theme',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Get.changeTheme(ThemeData.light());
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.dark_mode_outlined,
+                color: Colors.white,
+              ),
+              title: const Text(
+                'Dark Theme',
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                Get.changeTheme(ThemeData.dark());
+              },
+            ),
+          ],
+        ),
+        // /// `barrierColor: Color(0xFFFFFFF)` is setting the color of the barrier that
+        /// appears behind the bottom sheet to white. The barrier is the semi-transparent
+        /// background that appears behind the bottom sheet and prevents interaction with
+        /// the rest of the screen while the bottom sheet is open. By default, the
+        /// barrier color is set to a semi-transparent black color, but it can be
+        /// customized using the `barrierColor` property. In this case, the color is set
+        /// to white, which means that the barrier will be fully opaque and white in
+        /// color.
+        // barrierColor: Color(0xFFFFFFF),
+
+        /// bottom sheet to deep purple.
+        backgroundColor: Colors.deepPurple,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: const BorderSide(
+                width: 2, color: Colors.purple, style: BorderStyle.solid)));
+  }
 }
