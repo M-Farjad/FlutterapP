@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'APIs/apis.dart';
 import 'screens/home/home_screen.dart';
+import 'screens/routes/routes_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'SnackBar',
+      initialRoute: "/",
+      getPages: [
+        GetPage(name: '/', page: () => const MyApp()),
+        GetPage(name: '/home', page: () => const HomeScreen()),
+        GetPage(name: '/routes', page: () => const RoutesScreen()),
+      ],
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -55,7 +62,13 @@ class MyApp extends StatelessWidget {
                   );
                   log(HomeData);
                 },
-              )
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.toNamed("/home");
+                },
+                child: const Text('Home Screen'),
+              ),
             ],
           ),
         ),

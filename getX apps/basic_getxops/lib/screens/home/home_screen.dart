@@ -21,7 +21,13 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: const Text('Back to main'),
               ),
-              Text('${Get.arguments.toString()}'),
+              Text(Get.arguments != null ? Get.arguments.toString() : ''),
+              TextButton(
+                onPressed: () {
+                  Get.toNamed("/routes");
+                },
+                child: const Text('Back to main'),
+              ),
             ],
           ),
         ),

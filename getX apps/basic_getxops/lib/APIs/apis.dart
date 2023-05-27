@@ -83,7 +83,7 @@ class APIs {
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
-                Get.changeTheme(ThemeData.light());
+                Get.changeTheme(ThemeData.fallback());
               },
             ),
             ListTile(
