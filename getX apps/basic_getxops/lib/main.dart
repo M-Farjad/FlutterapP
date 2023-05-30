@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => const MyApp()),
         GetPage(name: '/home', page: () => const HomeScreen()),
-        GetPage(name: '/routes', page: () => const RoutesScreen()),
+        GetPage(name: '/routes', page: () => RoutesScreen()),
         // GetPage(name: '/routes:someparam', page: () => const RoutesScreen()),
       ],
       // unknownRoute: GetPage(name: '/notfound', page: () => const UnknownRouteScreen()),
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
                   //! Get.off(const HomeScreen());
                   // Get.offAll(const HomeScreen());
                   String HomeData = await Get.to(
-                    const HomeScreen(),
+                    () => const HomeScreen(),
                     transition: Transition.cupertino,
                     arguments: 'I am passed as arguement from main',
                     // duration: Duration(milliseconds: 2000),
