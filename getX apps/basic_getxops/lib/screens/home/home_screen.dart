@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed("/routes");
                 },
-                child: const Text('Back to main'),
+                child: const Text('to routes'),
               ),
             ],
           ),

@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => const MyApp()),
         GetPage(name: '/home', page: () => const HomeScreen()),
         GetPage(name: '/routes', page: () => const RoutesScreen()),
+        // GetPage(name: '/routes:someparam', page: () => const RoutesScreen()),
       ],
+      // unknownRoute: GetPage(name: '/notfound', page: () => const UnknownRouteScreen()),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -66,6 +68,13 @@ class MyApp extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Get.toNamed("/home");
+                  // Get.toNamed("/home? channel=New Bee&content=Flutter GetX");
+                  //to retrieve the value on other page use
+                  // Get.parameters['channel']
+                  /// `Get.offNamed("/home");` is navigating to the route named "/home" and removing
+                  /// all the previous screens from the navigation stack.
+                  /// It is equivalent to calling
+                  /// `Navigator.pushReplacementNamed(context, "/home")`.
                 },
                 child: const Text('Home Screen'),
               ),
