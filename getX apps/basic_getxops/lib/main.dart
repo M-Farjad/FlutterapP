@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:basic_getxops/APIs/student.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,19 +9,19 @@ import 'screens/home/home_screen.dart';
 import 'screens/routes/routes_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final student = Student(age: 25, name: 'Farjad').obs;
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'SnackBar',
       initialRoute: "/",
       getPages: [
-        GetPage(name: '/', page: () => const MyApp()),
+        GetPage(name: '/', page: () => MyApp()),
         GetPage(name: '/home', page: () => const HomeScreen()),
         GetPage(name: '/routes', page: () => RoutesScreen()),
         // GetPage(name: '/routes:someparam', page: () => const RoutesScreen()),
@@ -77,6 +78,17 @@ class MyApp extends StatelessWidget {
                   /// `Navigator.pushReplacementNamed(context, "/home")`.
                 },
                 child: const Text('Home Screen'),
+              ),
+              Obx(() => Text(student.value.name)),
+              TextButton(
+                onPressed: () {
+                  // if individual var is RX
+                  // student.value.name =student.value.name = student.value.name.toUpperCase
+                  student.update((student) {
+                    student!.name = student.name.toString().toUpperCase();
+                  });
+                },
+                child: const Text('Upper'),
               ),
             ],
           ),
