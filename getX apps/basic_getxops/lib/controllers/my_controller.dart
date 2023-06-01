@@ -15,8 +15,14 @@ class MyController extends GetxController {
     });
   }
 
-  var count = 0.obs;
+  // var count = 0.obs;
+  // void increment() {
+  //   count++;
+  // }
+
+  var count = 0;
   void increment() {
     count++;
+    update();
   }
 }

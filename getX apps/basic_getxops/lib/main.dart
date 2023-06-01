@@ -102,12 +102,21 @@ class MyApp extends StatelessWidget {
                 },
                 child: const Text('Upper & Increment count'),
               ),
-              GetX<MyController>(
-                // init: MyController(),  //!not neede bcz init globally
+
+              // Rx state management
+              // GetX<MyController>(
+              //   // init: MyController(),  //!not neede bcz init globally
+              //   builder: (controller) {
+              //     return Text('The value is ${myController.count}');
+              //   },
+              // ),
+
+              // simple state management
+              GetBuilder<MyController>(
                 builder: (controller) {
                   return Text('The value is ${myController.count}');
                 },
-              ),
+              )
             ],
           ),
         ),
