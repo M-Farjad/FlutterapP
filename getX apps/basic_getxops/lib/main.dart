@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'APIs/apis.dart';
+import 'controllers/my_controller.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/routes/routes_screen.dart';
 
@@ -14,7 +15,9 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-  final student = Student(age: 25, name: 'Farjad').obs;
+  // for whole Rx class
+  // final student = Student(age: 25, name: 'Farjad').obs;
+  MyController myController = Get.put(MyController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -79,14 +82,22 @@ class MyApp extends StatelessWidget {
                 },
                 child: const Text('Home Screen'),
               ),
-              Obx(() => Text(student.value.name)),
+              Obx(() => Text('Name is ${myController.student.value.name}')),
               TextButton(
                 onPressed: () {
                   // if individual var is RX
                   // student.value.name =student.value.name = student.value.name.toUpperCase
-                  student.update((student) {
-                    student!.name = student.name.toString().toUpperCase();
-                  });
+
+                  // for Rx class
+                  // student.update((student) {
+                  //   student!.name = student.name.toString().toUpperCase();
+                  // });
+
+                  // Getx controller Rx Variable
+                  // myController.convertToUpperCase();
+
+                  // Getx controller Rx class
+                  myController.convertUpperCase();
                 },
                 child: const Text('Upper'),
               ),
