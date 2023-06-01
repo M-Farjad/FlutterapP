@@ -98,8 +98,15 @@ class MyApp extends StatelessWidget {
 
                   // Getx controller Rx class
                   myController.convertUpperCase();
+                  myController.increment();
                 },
-                child: const Text('Upper'),
+                child: const Text('Upper & Increment count'),
+              ),
+              GetX<MyController>(
+                // init: MyController(),  //!not neede bcz init globally
+                builder: (controller) {
+                  return Text('The value is ${myController.count}');
+                },
               ),
             ],
           ),
