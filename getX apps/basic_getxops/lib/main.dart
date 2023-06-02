@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'APIs/apis.dart';
+import 'APIs/messages.dart';
 import 'controllers/my_controller.dart';
+import 'controllers/worker_controller.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/routes/routes_screen.dart';
 
@@ -20,9 +22,13 @@ class MyApp extends StatelessWidget {
   // final student = Student(age: 25, name: 'Farjad').obs;
   MyController myController = Get.put(MyController());
   IdController idController = Get.put(IdController());
+  WorkerController wkrController = Get.put(WorkerController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Messages(),
+      locale: const Locale('en', 'US'), //?to get device locale Get.deviceLocale
+      fallbackLocale: const Locale('en', 'US'), //?if wrong locale found
       title: 'SnackBar',
       initialRoute: "/",
       getPages: [
@@ -106,7 +112,7 @@ class MyApp extends StatelessWidget {
                 child: const Text('Upper & Increment count'),
               ),
 
-              // Rx state management
+              //! Rx state management
               // GetX<MyController>(
               //   // init: MyController(),  //!not neede bcz init globally
               //   builder: (controller) {
@@ -114,14 +120,14 @@ class MyApp extends StatelessWidget {
               //   },
               // ),
 
-              // // simple state management
+              //! simple state management
               // GetBuilder<MyController>(
               //   builder: (controller) {
               //     return Text('The value is ${myController.count}');
               //   },
               // ),
 
-              //GetX LifeCycle methods
+              //!GetX LifeCycle methods
               // GetBuilder<MyController>(
               //   // it is better to override inside the class
               //   // initState: (state) => myController.increment(),
@@ -131,22 +137,51 @@ class MyApp extends StatelessWidget {
               //   },
               // ),
 
-              //GetX unique Id
-              GetBuilder<IdController>(
-                id: 'txtId',
-                builder: (controller) {
-                  return Text('The value of count is: ${controller.count}');
-                },
-              ),
-              GetBuilder<IdController>(
-                builder: (controller) {
-                  return Text('The value of count is: ${controller.count}');
-                },
-              ),
+              //!GetX unique Id
+              // GetBuilder<IdController>(
+              //   id: 'txtId',
+              //   builder: (controller) {
+              //     return Text('The value of count is: ${controller.count}');
+              //   },
+              // ),
+              // GetBuilder<IdController>(
+              //   builder: (controller) {
+              //     return Text('The value of count is: ${controller.count}');
+              //   },
+              // ),
+              // TextButton(
+              //   onPressed: () => idController.increment(),
+              //   child: const Text('increment'),
+              // ),
+
+              //!GetX Workers
+              // TextButton(
+              //   onPressed: () => wkrController.increment(),
+              //   child: const Text('increment'),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.all(16),
+              //   child: TextField(
+              //     onChanged: (val) {
+              //       wkrController.increment();
+              //     },
+              //   ),
+              // ),
+
+              //!GetX Translations
+              Text('hello'.tr),
               TextButton(
-                onPressed: () => idController.increment(),
-                child: const Text('increment'),
-              ),
+                  onPressed: () => myController.changeLanguage('en', 'US'),
+                  child: const Text('English')),
+              TextButton(
+                  onPressed: () => myController.changeLanguage('hi', 'IN'),
+                  child: const Text('Hindi')),
+              TextButton(
+                  onPressed: () => myController.changeLanguage('fr', 'FR'),
+                  child: const Text('French')),
+              TextButton(
+                  onPressed: () => myController.changeLanguage('pk', 'PK'),
+                  child: const Text('Urdu')),
             ],
           ),
         ),

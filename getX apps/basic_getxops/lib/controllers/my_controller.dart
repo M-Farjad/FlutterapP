@@ -52,4 +52,9 @@ class MyController extends GetxController {
     log('Close Called');
     super.onClose();
   }
+
+  void changeLanguage(var param1, var param2) {
+    var locale = Locale(param1, param2);
+    Get.updateLocale(locale);
+  }
 }
