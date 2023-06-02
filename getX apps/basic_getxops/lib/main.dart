@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:basic_getxops/APIs/student.dart';
+import 'package:basic_getxops/controllers/id_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   // for whole Rx class
   // final student = Student(age: 25, name: 'Farjad').obs;
   MyController myController = Get.put(MyController());
+  IdController idController = Get.put(IdController());
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -83,6 +85,7 @@ class MyApp extends StatelessWidget {
                 child: const Text('Home Screen'),
               ),
               Obx(() => Text('Name is ${myController.student.value.name}')),
+
               TextButton(
                 onPressed: () {
                   // if individual var is RX
@@ -117,13 +120,32 @@ class MyApp extends StatelessWidget {
               //     return Text('The value is ${myController.count}');
               //   },
               // ),
-              GetBuilder<MyController>(
-                // it is better to override inside the class
-                // initState: (state) => myController.increment(),
-                // dispose: (_) => myController.cleanUpTask(),
+
+              //GetX LifeCycle methods
+              // GetBuilder<MyController>(
+              //   // it is better to override inside the class
+              //   // initState: (state) => myController.increment(),
+              //   // dispose: (_) => myController.cleanUpTask(),
+              //   builder: (controller) {
+              //     return Text('The value of count is: ${controller.count}');
+              //   },
+              // ),
+
+              //GetX unique Id
+              GetBuilder<IdController>(
+                id: 'txtId',
                 builder: (controller) {
                   return Text('The value of count is: ${controller.count}');
                 },
+              ),
+              GetBuilder<IdController>(
+                builder: (controller) {
+                  return Text('The value of count is: ${controller.count}');
+                },
+              ),
+              TextButton(
+                onPressed: () => idController.increment(),
+                child: const Text('increment'),
               ),
             ],
           ),
