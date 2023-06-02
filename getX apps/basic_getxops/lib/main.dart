@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
 
                   // Getx controller Rx class
                   myController.convertUpperCase();
-                  myController.increment();
+                  // myController.increment();
                 },
                 child: const Text('Upper & Increment count'),
               ),
@@ -111,12 +111,20 @@ class MyApp extends StatelessWidget {
               //   },
               // ),
 
-              // simple state management
+              // // simple state management
+              // GetBuilder<MyController>(
+              //   builder: (controller) {
+              //     return Text('The value is ${myController.count}');
+              //   },
+              // ),
               GetBuilder<MyController>(
+                // it is better to override inside the class
+                // initState: (state) => myController.increment(),
+                // dispose: (_) => myController.cleanUpTask(),
                 builder: (controller) {
-                  return Text('The value is ${myController.count}');
+                  return Text('The value of count is: ${controller.count}');
                 },
-              )
+              ),
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,9 +22,34 @@ class MyController extends GetxController {
   //   count++;
   // }
 
-  var count = 0;
-  void increment() {
-    count++;
+  // var count = 0;
+  // void increment() {
+  //   count++;
+  //   update();
+  // }
+
+  int count = 0;
+
+  Future<void> increment() async {
+    await Future.delayed(const Duration(seconds: 5));
+    this.count++;
     update();
+  }
+
+  void cleanUpTask() {
+    log('cleanUp Called');
+  }
+
+  @override
+  void onInit() {
+    log('Init Called');
+    super.onInit();
+    increment();
+  }
+
+  @override
+  void onClose() {
+    log('Close Called');
+    super.onClose();
   }
 }
