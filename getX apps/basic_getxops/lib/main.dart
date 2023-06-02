@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'APIs/apis.dart';
 import 'APIs/messages.dart';
+import 'controllers/async_controller.dart';
 import 'controllers/my_controller.dart';
 import 'controllers/worker_controller.dart';
 import 'screens/home/home_screen.dart';
@@ -18,6 +19,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
+
   // for whole Rx class
   // final student = Student(age: 25, name: 'Farjad').obs;
   MyController myController = Get.put(MyController());
@@ -25,6 +27,19 @@ class MyApp extends StatelessWidget {
   WorkerController wkrController = Get.put(WorkerController());
   @override
   Widget build(BuildContext context) {
+    // My Controller instance will be created even if it is not used
+    // tag will be used to find the instance with tag name
+    // Controller disposed when it is not used but if permanent is
+    // true the instance will be alive throughout the app
+    // MyController myController =
+    //     Get.put(MyController(), tag: 'instance1', permanent: true);
+
+    // Instance will be created when it is used
+    //It is similar to "permanent", the difference is that the instance
+    // is discarded when is not being used,
+    // but when it's use is needed again, Get will recreate the instance
+
+    Get.putAsync<AsyncController>(() async => AsyncController());
     return GetMaterialApp(
       translations: Messages(),
       locale: const Locale('en', 'US'), //?to get device locale Get.deviceLocale
@@ -169,19 +184,26 @@ class MyApp extends StatelessWidget {
               // ),
 
               //!GetX Translations
-              Text('hello'.tr),
+              // Text('hello'.tr),
+              // TextButton(
+              //     onPressed: () => myController.changeLanguage('en', 'US'),
+              //     child: const Text('English')),
+              // TextButton(
+              //     onPressed: () => myController.changeLanguage('hi', 'IN'),
+              //     child: const Text('Hindi')),
+              // TextButton(
+              //     onPressed: () => myController.changeLanguage('fr', 'FR'),
+              //     child: const Text('French')),
+              // TextButton(
+              //     onPressed: () => myController.changeLanguage('pk', 'PK'),
+              //     child: const Text('Urdu')),
+
               TextButton(
-                  onPressed: () => myController.changeLanguage('en', 'US'),
-                  child: const Text('English')),
-              TextButton(
-                  onPressed: () => myController.changeLanguage('hi', 'IN'),
-                  child: const Text('Hindi')),
-              TextButton(
-                  onPressed: () => myController.changeLanguage('fr', 'FR'),
-                  child: const Text('French')),
-              TextButton(
-                  onPressed: () => myController.changeLanguage('pk', 'PK'),
-                  child: const Text('Urdu')),
+                  onPressed: () {
+                    Get.find<AsyncController>();
+                    Get.find<AsyncController>().incrementCounter();
+                  },
+                  child: const Text('Click Me'))
             ],
           ),
         ),
