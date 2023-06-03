@@ -1,0 +1,23 @@
+// Smart Management
+//GetX provides SmartManagement that lets us configure how dependencies
+// behave in terms of memory management.
+// GetMaterialApp {
+// smartManagement: SmartManagement.full // or .keepFactory or .onlyBuilder
+// }
+// Full Mode
+// Everything gets disposed as soon as the route is removed from navigation stack,
+// unless declared permanent.
+
+// SmartManagement.keepFactory
+//==
+// Just like SmartManagement.full, it will remove it's dependencies when I
+// 'it's not being used anymore. However, it will keep their factory,
+// which means it will recreate the dependency if you need that instance again.
+
+// SmartManagement.onlyBuilders
+//====
+// With this option, only controllers started in init: or loaded into a Binding
+// with Get.lazyPut () will be disposed.
+//
+// If you use Get.put() or Get.putAsync() or any other approach, I
+9/1 SmartManagement will not have permissions to exclude this dependency.

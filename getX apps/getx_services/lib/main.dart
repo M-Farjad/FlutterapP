@@ -3,10 +3,17 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bindings/allcontrollerbindings.dart';
+import 'bindings/homeControllerBinding.dart';
+import 'bindings/myappcontrollerbinding.dart';
+import 'controller/home_controller.dart';
+import 'controller/my_controller.dart';
+import 'screens/home_screen.dart';
 import 'services/service.dart';
 
 Future<void> main() async {
   await initServices();
+  MyAppControllerBinding().dependencies();
   runApp(const MyApp());
 }
 
@@ -23,6 +30,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      //!All Binding Class
+      // initialBinding: AllControllerBinding(),
+
+      //!Separate Bindings classes
+      // getPages: [
+      //   GetPage(
+      //       name: '/home', page: () => Home(), binding: HomeControllerBinding())
+      // ],
+
+      //!BindingBuilder
+      getPages: [
+        GetPage(
+          name: '/home',
+          page: () => Home(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut<HomeController>(() => HomeController());
+          }),
+        ),
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -38,11 +64,40 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              //!Service
               TextButton(
-                  onPressed: () {
-                    Get.find<Service>().incrementCounter();
-                  },
-                  child: const Text('Click Me'))
+                onPressed: () {
+                  Get.find<Service>().incrementCounter();
+                },
+                child: const Text('Click Me'),
+              ),
+
+              //!Bindings
+              Obx(
+                () => Text(
+                  'The value is: ${Get.find<MyController>().count}',
+                  style: const TextStyle(fontSize: 25),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.find<MyController>().increment();
+                },
+                child: Text('increment'),
+              ),
+              //? Move to Home
+              TextButton(
+                onPressed: () {
+                  // Get.to(Home());
+
+                  //?For Named Routes
+                  Get.toNamed('/home');
+
+                  //?for normal routes
+                  // Get.to(Home(), binding: HomeControllerBinding());
+                },
+                child: Text('Home'),
+              )
             ],
           ),
         )),
