@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   var storage = GetStorage();
+
   TextEditingController emailController = TextEditingController();
 
   // This widget is the root of your application.
