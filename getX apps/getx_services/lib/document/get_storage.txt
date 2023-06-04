@@ -1,0 +1,18 @@
+it is used to store persistent key/value pairs
+can store int, float, String, List, Map
+
+    To Listen for changes 
+        var listen  = storage.listen((){print('Email Changed);});
+    when subscribed to listen event it should be disposed after used
+        storage.removeListen(listen);
+    To listen For change sin key
+        storage.listenKey('Email',(value){
+            print('new key is $value);
+        });
+    To remove 
+        storage.remove('email');
+    Erase the container
+        storage.Erase();
+    create container with a name 
+        GetStorage g = GetStorage('MyStorage');
+        await GetStorage.init('MyStorage');
