@@ -1,6 +1,5 @@
 it is used to store persistent key/value pairs
 can store int, float, String, List, Map
-
     To Listen for changes 
         var listen  = storage.listen((){print('Email Changed);});
     when subscribed to listen event it should be disposed after used

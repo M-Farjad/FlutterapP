@@ -1,0 +1,7 @@
+GetView:
+    if we have a single controller as a adependency then we can use GetVIew instead
+    of StatelessWidget avoid wiritng Get.find()
+
+GetWidget:
+    similar but gives the same instance with Get.find() everytime. USeful when used
+    with Get.create() but when used with GetView doesn't increment
