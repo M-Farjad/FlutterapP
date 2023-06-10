@@ -21,8 +21,8 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     _animation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -64,17 +64,17 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Button with Bottom Container'),
+        title: const Text('Button with Bottom Container'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (!_isExpanded)
             MaterialButton(
               onPressed: _toggleContainer,
-              child: Text('Open Container'),
+              child: const Text('Open Container'),
             ),
-          if (_isExpanded) SizedBox(height: 16),
+          if (_isExpanded) const SizedBox(height: 16),
           SizeTransition(
             sizeFactor: _animation,
             child: Container(
@@ -151,10 +151,192 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                     ),
                   ),
                   if (_isExpanded)
-                    IconButton(
-                      onPressed: _toggleContainer,
-                      icon: Icon(Icons.keyboard_arrow_down_rounded),
-                    ),
+                    _iscatBtnToggled
+                        ? Container(
+                            margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+                            width: mq.width * .9,
+                            height: mq.height * .4,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 0,
+                                  top: 13,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 5),
+                                    width: mq.width * .9,
+                                    height: mq.height * .3,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: const Color(0xff4285f4)),
+                                      color: const Color(0xffffffff),
+                                      borderRadius:
+                                          BorderRadius.circular(11.9105625153),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          // autogrouphqe3zRR (GrW4myhpM9TcP97xkwHqe3)
+                                          margin: const EdgeInsets.fromLTRB(
+                                              5, 10, 0, 14),
+                                          // width: 148,
+                                          // height: 37,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Make an Offer',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: kTextColor),
+                                              ),
+                                              Text(
+                                                'Shadi Package',
+                                                style: TextStyle(
+                                                  color: kPrimaryColor,
+                                                  fontSize: 12,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          // autogroupwaljePV (GrW4syXpnBkm6sBTE7WaLj)
+                                          margin: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 18.63),
+                                          width: double.infinity,
+                                          height: 28.37,
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ElevatedButton(
+                                                onPressed: () {},
+                                                style: ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                        side: BorderSide(
+                                                            color:
+                                                                kofferColor)),
+                                                    backgroundColor:
+                                                        Colors.white),
+                                                child: Text(
+                                                  '45000',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: kofferColor),
+                                                ),
+                                              ),
+                                              SizedBox(width: mq.width * .01),
+                                              ElevatedButton(
+                                                onPressed: () {},
+                                                style: ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                    ),
+                                                    backgroundColor:
+                                                        kofferColor),
+                                                child: Text(
+                                                  '35000',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                              SizedBox(width: mq.width * .01),
+                                              ElevatedButton(
+                                                onPressed: () {},
+                                                style: ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20),
+                                                        side: BorderSide(
+                                                            color:
+                                                                kofferColor)),
+                                                    backgroundColor:
+                                                        Colors.white),
+                                                child: Text(
+                                                  '30000',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: kofferColor),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'RS',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: kTextColor),
+                                            ),
+                                            SizedBox(width: mq.width * .01),
+                                            SizedBox(
+                                                width: mq.width * .1,
+                                                child: TextFormField()),
+                                            const Spacer(),
+                                            ElevatedButton(
+                                              onPressed: () {},
+                                              style: ElevatedButton.styleFrom(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  backgroundColor: kofferColor),
+                                              child: Text(
+                                                'Next',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  // group34225V6b (3:263)
+                                  left: mq.width * .4,
+                                  top: 0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: const Color(0xff4285f4)),
+                                    ),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          _toggleContainer();
+                                        },
+                                        style: TextButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down_rounded)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox()
                 ],
               ),
             ),
