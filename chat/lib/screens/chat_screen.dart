@@ -152,23 +152,26 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 SizedBox(height: mq.height * .01),
                 Container(
-                  padding: EdgeInsets.fromLTRB(18.49, 12.54, 49.44, 12.22),
+                  padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
                   width: mq.width * .4,
                   height: mq.height * .08,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xff4285f4)),
+                    border: Border.all(color: kofferColor),
                     color: Color(0xffffffff),
-                    borderRadius: BorderRadius.circular(20.4075069427),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        // group100QL3 (3:117)
-                        margin: EdgeInsets.fromLTRB(0, 0, 10.87, 1.6),
-                        width: 18.17,
-                        height: 18.16,
+                      SvgPicture.asset(
+                        'assets/icons/make_offer_unselected.svg',
                       ),
+                      Spacer(),
+                      Text(
+                        'Make an offer',
+                        style: TextStyle(color: kofferColor),
+                      ),
+                      Spacer(),
                     ],
                   ),
                 ),
