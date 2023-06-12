@@ -17,10 +17,12 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
   bool _isCustomBtnToggled = false;
   late AnimationController _animationController;
   late Animation<double> _animation;
-  TextEditingController _textEditingController = TextEditingController();
-  void _updateAmount(String amount) {
+  final _textEditingController = TextEditingController();
+  int _selectedButtonIndex = 0;
+  void _updateAmount(String amount, int index) {
     setState(() {
       _textEditingController.text = amount;
+      _selectedButtonIndex = index;
     });
   }
 
@@ -35,7 +37,7 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
     );
     // _textEditingController.addListener(_updateAmount());   //in case of void func() no argue
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateAmount(_textEditingController.text);
+      _updateAmount(_textEditingController.text, _selectedButtonIndex);
     });
   }
 
@@ -189,11 +191,8 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          // autogrouphqe3zRR (GrW4myhpM9TcP97xkwHqe3)
                                           margin: const EdgeInsets.fromLTRB(
                                               5, 10, 0, 14),
-                                          // width: 148,
-                                          // height: 37,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -214,83 +213,111 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          // autogroupwaljePV (GrW4syXpnBkm6sBTE7WaLj)
-                                          margin: const EdgeInsets.fromLTRB(
-                                              0, 0, 0, 18.63),
-                                          width: double.infinity,
-                                          height: 28.37,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  _updateAmount("45000");
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        side: BorderSide(
-                                                            color:
-                                                                kofferColor)),
-                                                    backgroundColor:
-                                                        Colors.white),
-                                                child: Text(
-                                                  '45000',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: kofferColor),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                _updateAmount("45000", 0);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  side: BorderSide(
+                                                    color:
+                                                        _selectedButtonIndex ==
+                                                                0
+                                                            ? Colors.transparent
+                                                            : kofferColor,
+                                                  ),
+                                                ),
+                                                backgroundColor:
+                                                    _selectedButtonIndex == 0
+                                                        ? kofferColor
+                                                        : Colors.white,
+                                              ),
+                                              child: Text(
+                                                '45000',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color:
+                                                      _selectedButtonIndex == 0
+                                                          ? Colors.white
+                                                          : kofferColor,
                                                 ),
                                               ),
-                                              SizedBox(width: mq.width * .01),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  _updateAmount("35000");
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                    ),
-                                                    backgroundColor:
-                                                        kofferColor),
-                                                child: const Text(
-                                                  '35000',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Colors.white),
+                                            ),
+                                            SizedBox(width: mq.width * .01),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                _updateAmount("35000", 1);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  side: BorderSide(
+                                                    color:
+                                                        _selectedButtonIndex ==
+                                                                1
+                                                            ? Colors.transparent
+                                                            : kofferColor,
+                                                  ),
+                                                ),
+                                                backgroundColor:
+                                                    _selectedButtonIndex == 1
+                                                        ? kofferColor
+                                                        : Colors.white,
+                                              ),
+                                              child: Text(
+                                                '35000',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color:
+                                                      _selectedButtonIndex == 1
+                                                          ? Colors.white
+                                                          : kofferColor,
                                                 ),
                                               ),
-                                              SizedBox(width: mq.width * .01),
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  _updateAmount("30000");
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        side: BorderSide(
-                                                            color:
-                                                                kofferColor)),
-                                                    backgroundColor:
-                                                        Colors.white),
-                                                child: Text(
-                                                  '30000',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: kofferColor),
+                                            ),
+                                            SizedBox(width: mq.width * .01),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                _updateAmount("30000", 2);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  side: BorderSide(
+                                                    color:
+                                                        _selectedButtonIndex ==
+                                                                2
+                                                            ? Colors.transparent
+                                                            : kofferColor,
+                                                  ),
+                                                ),
+                                                backgroundColor:
+                                                    _selectedButtonIndex == 2
+                                                        ? kofferColor
+                                                        : Colors.white,
+                                              ),
+                                              child: Text(
+                                                '30000',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color:
+                                                      _selectedButtonIndex == 2
+                                                          ? Colors.white
+                                                          : kofferColor,
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
+                                        SizedBox(height: mq.height * .05),
                                         Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
