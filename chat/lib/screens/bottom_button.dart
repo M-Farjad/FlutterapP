@@ -17,6 +17,12 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
   bool _isCustomBtnToggled = false;
   late AnimationController _animationController;
   late Animation<double> _animation;
+  TextEditingController _textEditingController = TextEditingController();
+  void _updateAmount(String amount) {
+    setState(() {
+      _textEditingController.text = amount;
+    });
+  }
 
   @override
   void initState() {
@@ -27,11 +33,16 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
       parent: _animationController,
       curve: Curves.easeInOut,
     );
+    // _textEditingController.addListener(_updateAmount());   //in case of void func() no argue
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _updateAmount(_textEditingController.text);
+    });
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _textEditingController.dispose();
     super.dispose();
   }
 
@@ -214,7 +225,9 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                                 CrossAxisAlignment.center,
                                             children: [
                                               ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  _updateAmount("45000");
+                                                },
                                                 style: ElevatedButton.styleFrom(
                                                     shape: RoundedRectangleBorder(
                                                         borderRadius:
@@ -234,7 +247,9 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                               ),
                                               SizedBox(width: mq.width * .01),
                                               ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  _updateAmount("35000");
+                                                },
                                                 style: ElevatedButton.styleFrom(
                                                     shape:
                                                         RoundedRectangleBorder(
@@ -244,7 +259,7 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                                     ),
                                                     backgroundColor:
                                                         kofferColor),
-                                                child: Text(
+                                                child: const Text(
                                                   '35000',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
@@ -253,7 +268,9 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                               ),
                                               SizedBox(width: mq.width * .01),
                                               ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  _updateAmount("30000");
+                                                },
                                                 style: ElevatedButton.styleFrom(
                                                     shape: RoundedRectangleBorder(
                                                         borderRadius:
@@ -286,8 +303,22 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                             ),
                                             SizedBox(width: mq.width * .01),
                                             SizedBox(
-                                                width: mq.width * .1,
-                                                child: TextFormField()),
+                                              width: mq.width * .2,
+                                              child: TextFormField(
+                                                controller:
+                                                    _textEditingController,
+                                                decoration:
+                                                    const InputDecoration(
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          vertical: 5),
+                                                  isCollapsed: true,
+                                                  hintText: 'Amount in Rs',
+                                                  hintStyle:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ),
+                                            ),
                                             const Spacer(),
                                             ElevatedButton(
                                               onPressed: () {},
@@ -298,7 +329,7 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                                                             20),
                                                   ),
                                                   backgroundColor: kofferColor),
-                                              child: Text(
+                                              child: const Text(
                                                 'Next',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
