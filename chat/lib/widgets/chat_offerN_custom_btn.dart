@@ -25,25 +25,27 @@ class CustomElevatedButton extends StatelessWidget {
     final Color unselectedColor = isToggled ? Colors.white : buttonColor;
     final Color borderColor = buttonColor;
 
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      icon: SvgPicture.asset(asset),
-      label: Text(
-        label,
-        style: TextStyle(
-          fontSize: mq.width * .03,
-          color: isToggled ? Colors.white : unselectedColor,
+    return Expanded(
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        icon: SvgPicture.asset(asset),
+        label: Text(
+          label,
+          style: TextStyle(
+            fontSize: mq.width * .03,
+            color: isToggled ? Colors.white : unselectedColor,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: selectedColor,
-        // padding: EdgeInsets.symmetric(
-        //   horizontal: mq.width * .08,
-        //   vertical: mq.height * .01,
-        // ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: borderColor),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: selectedColor,
+          // padding: EdgeInsets.symmetric(
+          //   horizontal: mq.width * .08,
+          //   vertical: mq.height * .01,
+          // ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: borderColor),
+          ),
         ),
       ),
     );

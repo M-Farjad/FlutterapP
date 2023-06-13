@@ -8,7 +8,8 @@ class ButtonController extends GetxController
   RxBool isCustomBtnToggled = false.obs;
   AnimationController? animationController;
   late Animation<double> animation;
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController offerAmountEditingController = TextEditingController();
+  TextEditingController offerDetailsEditingController = TextEditingController();
   RxInt selectedButtonIndex = 0.obs;
 
   @override
@@ -22,8 +23,8 @@ class ButtonController extends GetxController
       parent: animationController!,
       curve: Curves.easeInOut,
     );
-    textEditingController.text = '45000';
-    updateAmount(textEditingController.text, selectedButtonIndex.value);
+    offerAmountEditingController.text = '45000';
+    updateAmount(offerAmountEditingController.text, selectedButtonIndex.value);
 
     // Dispose the controller when it is no longer needed
     // (You can also use `onClose` instead of `dispose` in newer versions of GetX)
@@ -54,14 +55,15 @@ class ButtonController extends GetxController
   }
 
   void updateAmount(String amount, int index) {
-    textEditingController.text = amount;
+    offerAmountEditingController.text = amount;
     selectedButtonIndex.value = index;
   }
 
   @override
   void dispose() {
     animationController?.dispose();
-    textEditingController.dispose();
+    offerAmountEditingController.dispose();
+    offerDetailsEditingController.dispose();
     super.dispose();
   }
 }
