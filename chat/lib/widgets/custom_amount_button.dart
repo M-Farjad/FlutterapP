@@ -18,26 +18,29 @@ class CustomAmountButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        onPressed(amount, index);
-      },
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(
-            color:
-                selectedButtonIndex == index ? Colors.transparent : kofferColor,
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: () {
+          onPressed(amount, index);
+        },
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: selectedButtonIndex == index
+                  ? Colors.transparent
+                  : kofferColor,
+            ),
           ),
+          backgroundColor:
+              selectedButtonIndex == index ? kofferColor : Colors.white,
         ),
-        backgroundColor:
-            selectedButtonIndex == index ? kofferColor : Colors.white,
-      ),
-      child: Text(
-        amount,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: selectedButtonIndex == index ? Colors.white : kofferColor,
+        child: Text(
+          amount,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: selectedButtonIndex == index ? Colors.white : kofferColor,
+          ),
         ),
       ),
     );

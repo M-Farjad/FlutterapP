@@ -38,6 +38,7 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.6
   flutter_animated_button: ^2.0.3
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../constants/constants.dart';
 import '../main.dart';
+import '../widgets/chat_offerN_custom_btn.dart';
 import '../widgets/custom_amount_button.dart';
 
 class ButtonWithBottomContainer extends StatefulWidget {
@@ -97,74 +98,43 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: mq.width * .04),
-                    padding: EdgeInsets.symmetric(vertical: mq.width * .02),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            _toggleOffer();
-                          },
-                          icon: SvgPicture.asset(_iscatBtnToggled
-                              ? 'assets/icons/make_offer_selected.svg'
-                              : 'assets/icons/make_offer_unselected.svg'),
-                          label: Text(
-                            'Make an offer',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color:
-                                  _iscatBtnToggled ? Colors.white : kofferColor,
+                      margin: EdgeInsets.symmetric(horizontal: mq.width * .04),
+                      padding: EdgeInsets.symmetric(vertical: mq.width * .02),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: mq.width * .02),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: CustomElevatedButton(
+                                isToggled: _iscatBtnToggled,
+                                onPressed: _toggleOffer,
+                                asset: _iscatBtnToggled
+                                    ? 'assets/icons/make_offer_selected.svg'
+                                    : 'assets/icons/make_offer_unselected.svg',
+                                label: 'Make an offer',
+                                buttonColor: kofferColor,
+                              ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                _iscatBtnToggled ? kofferColor : Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: mq.width * .08,
-                                vertical: mq.height * .01),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(color: kofferColor),
+                            SizedBox(width: mq.width * .02),
+                            Expanded(
+                              child: CustomElevatedButton(
+                                isToggled: _isCustomBtnToggled,
+                                onPressed: _toggleCustom,
+                                asset: _isCustomBtnToggled
+                                    ? 'assets/icons/customize_offer_selected.svg'
+                                    : 'assets/icons/customize_offer_unselected.svg',
+                                label: 'Customization Details',
+                                buttonColor: kPrimaryColor,
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                        SizedBox(width: mq.width * .02),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            _toggleCustom();
-                          },
-                          icon: SvgPicture.asset(_isCustomBtnToggled
-                              ? 'assets/icons/customize_offer_selected.svg'
-                              : 'assets/icons/customize_offer_unselected.svg'),
-                          label: Text(
-                            'Customization Details',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: _isCustomBtnToggled
-                                  ? Colors.white
-                                  : kPrimaryColor,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: _isCustomBtnToggled
-                                ? kPrimaryColor
-                                : Colors.white,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: mq.width * .01,
-                                vertical: mq.height * .01),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(color: kPrimaryColor),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      )),
                   if (_isExpanded)
                     _iscatBtnToggled
                         ? Container(
