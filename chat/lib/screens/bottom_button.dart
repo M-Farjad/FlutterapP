@@ -1,80 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../constants/constants.dart';
+import '../controller/offer_btn_controller.dart';
 import '../main.dart';
 import '../widgets/chat_offerN_custom_btn.dart';
 import '../widgets/custom_amount_button.dart';
 
-class ButtonWithBottomContainer extends StatefulWidget {
-  @override
-  _ButtonWithBottomContainerState createState() =>
-      _ButtonWithBottomContainerState();
-}
-
-class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
-    with SingleTickerProviderStateMixin {
-  bool _isExpanded = false;
-  bool _iscatBtnToggled = true;
-  bool _isCustomBtnToggled = false;
-  late AnimationController _animationController;
-  late Animation<double> _animation;
-  final _textEditingController = TextEditingController();
-  int _selectedButtonIndex = 0;
-  void _updateAmount(String amount, int index) {
-    setState(() {
-      _textEditingController.text = amount;
-      _selectedButtonIndex = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
-    _animation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-    _textEditingController.text = '45000';
-    // _textEditingController.addListener(_updateAmount());   //in case of void func() no argue
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateAmount(_textEditingController.text, _selectedButtonIndex);
-    });
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
-  void _toggleOffer() {
-    setState(() {
-      _iscatBtnToggled = !_iscatBtnToggled;
-      _isCustomBtnToggled = !_iscatBtnToggled;
-    });
-  }
-
-  void _toggleCustom() {
-    setState(() {
-      _isCustomBtnToggled = !_isCustomBtnToggled;
-      _iscatBtnToggled = !_isCustomBtnToggled;
-    });
-  }
-
-  void _toggleContainer() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-      if (_isExpanded) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-      }
-    });
-  }
+class ButtonWithBottomContainer extends StatelessWidget {
+  final ButtonController _buttonController = Get.put(ButtonController());
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +19,37 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (!_isExpanded)
-            MaterialButton(
-              onPressed: _toggleContainer,
-              child: const Text('Open Container'),
-            ),
-          if (_isExpanded) const SizedBox(height: 16),
-          SizeTransition(
-            sizeFactor: _animation,
-            child: Container(
-              color: Colors.grey[200],
-              child: Column(
-                children: [
-                  Container(
+          Obx(
+            () => !_buttonController.isExpanded.value
+                ? MaterialButton(
+                    onPressed: _buttonController.toggleContainer,
+                    child: const Text('Open Container'),
+                  )
+                : const SizedBox(height: 16),
+          ),
+          Obx(
+            () => SizeTransition(
+              sizeFactor: _buttonController.isExpanded.value
+                  ? CurvedAnimation(
+                      parent: _buttonController.animationController!,
+                      curve: Curves.easeInOut,
+                    )
+                  // : const AlwaysStoppedAnimation<double>(0),
+                  : CurvedAnimation(
+                      parent: _buttonController.animationController!,
+                      curve: Curves.easeInOut,
+                    ),
+              child: Container(
+                color: Colors.grey[200],
+                child: Column(
+                  children: [
+                    Container(
                       margin: EdgeInsets.symmetric(horizontal: mq.width * .04),
                       padding: EdgeInsets.symmetric(vertical: mq.width * .02),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white),
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
                       child: Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: mq.width * .02),
@@ -111,9 +58,10 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                           children: [
                             Expanded(
                               child: CustomElevatedButton(
-                                isToggled: _iscatBtnToggled,
-                                onPressed: _toggleOffer,
-                                asset: _iscatBtnToggled
+                                isToggled:
+                                    _buttonController.isCatBtnToggled.value,
+                                onPressed: _buttonController.toggleOffer,
+                                asset: _buttonController.isCatBtnToggled.value
                                     ? 'assets/icons/make_offer_selected.svg'
                                     : 'assets/icons/make_offer_unselected.svg',
                                 label: 'Make an offer',
@@ -123,9 +71,11 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                             SizedBox(width: mq.width * .02),
                             Expanded(
                               child: CustomElevatedButton(
-                                isToggled: _isCustomBtnToggled,
-                                onPressed: _toggleCustom,
-                                asset: _isCustomBtnToggled
+                                isToggled:
+                                    _buttonController.isCustomBtnToggled.value,
+                                onPressed: _buttonController.toggleCustom,
+                                asset: _buttonController
+                                        .isCustomBtnToggled.value
                                     ? 'assets/icons/customize_offer_selected.svg'
                                     : 'assets/icons/customize_offer_unselected.svg',
                                 label: 'Customization Details',
@@ -134,163 +84,187 @@ class _ButtonWithBottomContainerState extends State<ButtonWithBottomContainer>
                             ),
                           ],
                         ),
-                      )),
-                  if (_isExpanded)
-                    _iscatBtnToggled
-                        ? Container(
-                            margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-                            width: mq.width * .9,
-                            height: mq.height * .4,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 13,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 5),
-                                    width: mq.width * .9,
-                                    height: mq.height * .3,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: kofferColor),
-                                      color: kWhiteColor,
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 5, vertical: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Make an Offer',
-                                                style: TextStyle(
+                      ),
+                    ),
+                    Obx(
+                      () => _buttonController.isExpanded.value &&
+                              _buttonController.isCatBtnToggled.value
+                          ? Container(
+                              margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+                              width: mq.width * .9,
+                              height: mq.height * .4,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 13,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 5),
+                                      width: mq.width * .9,
+                                      height: mq.height * .3,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: kofferColor),
+                                        color: kWhiteColor,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 5, vertical: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Make an Offer',
+                                                  style: TextStyle(
                                                     fontSize: 20,
-                                                    color: kTextColor),
-                                              ),
-                                              Text(
-                                                'Shadi Package',
-                                                style: TextStyle(
-                                                  color: kPrimaryColor,
-                                                  fontSize: 12,
+                                                    color: kTextColor,
+                                                  ),
                                                 ),
-                                              )
+                                                Text(
+                                                  'Shadi',
+                                                  style: TextStyle(
+                                                    color: kPrimaryColor,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              CustomAmountButton(
+                                                amount: '45000',
+                                                index: 0,
+                                                selectedButtonIndex:
+                                                    _buttonController
+                                                        .selectedButtonIndex
+                                                        .value
+                                                        .obs,
+                                                onPressed: (amount, index) =>
+                                                    _buttonController
+                                                        .updateAmount(
+                                                            amount, index),
+                                              ),
+                                              SizedBox(width: mq.width * .01),
+                                              CustomAmountButton(
+                                                amount: '35000',
+                                                index: 1,
+                                                selectedButtonIndex:
+                                                    _buttonController
+                                                        .selectedButtonIndex
+                                                        .value
+                                                        .obs,
+                                                onPressed: (amount, index) =>
+                                                    _buttonController
+                                                        .updateAmount(
+                                                            amount, index),
+                                              ),
+                                              SizedBox(width: mq.width * .01),
+                                              CustomAmountButton(
+                                                amount: '30000',
+                                                index: 2,
+                                                selectedButtonIndex:
+                                                    _buttonController
+                                                        .selectedButtonIndex
+                                                        .value
+                                                        .obs,
+                                                onPressed: (amount, index) =>
+                                                    _buttonController
+                                                        .updateAmount(
+                                                            amount, index),
+                                              ),
                                             ],
                                           ),
-                                        ),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            CustomAmountButton(
-                                              amount: '45000',
-                                              index: 0,
-                                              selectedButtonIndex:
-                                                  _selectedButtonIndex,
-                                              onPressed: _updateAmount,
-                                            ),
-                                            SizedBox(width: mq.width * .01),
-                                            CustomAmountButton(
-                                              amount: '35000',
-                                              index: 1,
-                                              selectedButtonIndex:
-                                                  _selectedButtonIndex,
-                                              onPressed: _updateAmount,
-                                            ),
-                                            SizedBox(width: mq.width * .01),
-                                            CustomAmountButton(
-                                              amount: '30000',
-                                              index: 2,
-                                              selectedButtonIndex:
-                                                  _selectedButtonIndex,
-                                              onPressed: _updateAmount,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: mq.height * .05),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'RS',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: kTextColor),
-                                            ),
-                                            SizedBox(width: mq.width * .01),
-                                            SizedBox(
-                                              width: mq.width * .2,
-                                              child: TextFormField(
-                                                controller:
-                                                    _textEditingController,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                          vertical: 5),
-                                                  isCollapsed: true,
-                                                  hintText: 'Amount in Rs',
-                                                  hintStyle:
-                                                      TextStyle(fontSize: 12),
+                                          SizedBox(height: mq.height * .05),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'RS',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: kTextColor),
+                                              ),
+                                              SizedBox(width: mq.width * .01),
+                                              SizedBox(
+                                                width: mq.width * .2,
+                                                child: TextFormField(
+                                                  controller: _buttonController
+                                                      .textEditingController,
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 5),
+                                                    isCollapsed: true,
+                                                    hintText: 'Amount in Rs',
+                                                    hintStyle:
+                                                        TextStyle(fontSize: 12),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            const Spacer(),
-                                            ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                  ),
-                                                  backgroundColor: kofferColor),
-                                              child: const Text(
-                                                'Next',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                              const Spacer(),
+                                              ElevatedButton(
+                                                onPressed: () {},
+                                                style: ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                    ),
+                                                    backgroundColor:
+                                                        kofferColor),
+                                                child: const Text(
+                                                  'Next',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Positioned(
-                                  // group34225V6b (3:263)
-                                  left: mq.width * .4,
-                                  top: 0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: const Color(0xff4285f4)),
+                                  Positioned(
+                                    left: mq.width * .4,
+                                    top: 0,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: const Color(0xff4285f4)),
+                                      ),
+                                      child: IconButton(
+                                          onPressed: () {
+                                            _buttonController.toggleContainer();
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                          ),
+                                          icon: const Icon(Icons
+                                              .keyboard_arrow_down_rounded)),
                                     ),
-                                    child: IconButton(
-                                        onPressed: () {
-                                          _toggleContainer();
-                                        },
-                                        style: TextButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        icon: const Icon(
-                                            Icons.keyboard_arrow_down_rounded)),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : const SizedBox()
-                ],
+                                ],
+                              ),
+                            )
+                          : const SizedBox(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

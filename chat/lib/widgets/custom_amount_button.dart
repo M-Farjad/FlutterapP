@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constants/constants.dart';
 
 class CustomAmountButton extends StatelessWidget {
   final String amount;
   final int index;
-  final int selectedButtonIndex;
-  final Function(String, int) onPressed;
+
+  final RxInt selectedButtonIndex;
+  final void Function(String, int) onPressed; // Updated type
 
   const CustomAmountButton({
     Key? key,
@@ -20,9 +22,7 @@ class CustomAmountButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ElevatedButton(
-        onPressed: () {
-          onPressed(amount, index);
-        },
+        onPressed: () => onPressed(amount, index),
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
