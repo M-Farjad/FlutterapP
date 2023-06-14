@@ -13,14 +13,15 @@ class OfferNCustomTexts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
               color: kTextColor,
             ),
           ),
@@ -28,6 +29,7 @@ class OfferNCustomTexts extends StatelessWidget {
             package,
             style: TextStyle(
               color: kPrimaryColor,
+              fontWeight: FontWeight.w700,
               fontSize: 12,
             ),
           ),
