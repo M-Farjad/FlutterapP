@@ -1,15 +1,14 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:chat/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../helper/my_date_util.dart';
+import '../controller/offer_btn_controller.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
 import '../models/message_model.dart';
+import '../widgets/chat_offer_toggler.dart';
 import '../widgets/message_card.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -20,7 +19,49 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final ButtonController _buttonController = Get.put(ButtonController());
+
   final List<MessageModel> _list = [
+    MessageModel(
+      msg: "we will make it together",
+      toID: "user1",
+      read: "false",
+      type: MessageType.text,
+      fromID: "user2",
+      sent: "1681932499129",
+    ),
+    MessageModel(
+      msg: "we will make it together",
+      toID: "user1",
+      read: "false",
+      type: MessageType.text,
+      fromID: "user2",
+      sent: "1681932499129",
+    ),
+    MessageModel(
+      msg: "we will make it together",
+      toID: "user1",
+      read: "false",
+      type: MessageType.text,
+      fromID: "user2",
+      sent: "1681932499129",
+    ),
+    MessageModel(
+      msg: "we will make it together",
+      toID: "user1",
+      read: "false",
+      type: MessageType.text,
+      fromID: "user2",
+      sent: "1681932499129",
+    ),
+    MessageModel(
+      msg: "we will make it together",
+      toID: "user1",
+      read: "false",
+      type: MessageType.text,
+      fromID: "user2",
+      sent: "1681932499129",
+    ),
     MessageModel(
       msg: "we will make it together",
       toID: "user1",
@@ -151,31 +192,36 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 SizedBox(height: mq.height * .01),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
-                  width: mq.width * .4,
-                  height: mq.height * .08,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: kofferColor),
-                    color: Color(0xffffffff),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/make_offer_unselected.svg',
-                      ),
-                      Spacer(),
-                      Text(
-                        'Make an offer',
-                        style: TextStyle(color: kofferColor),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                ),
-                _chatInput(),
+                // Container(
+                //   padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
+                //   width: mq.width * .4,
+                //   height: mq.height * .08,
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: kofferColor),
+                //     color: Color(0xffffffff),
+                //     borderRadius: BorderRadius.circular(20),
+                //   ),
+                //   child: Row(
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //       SvgPicture.asset(
+                //         'assets/icons/make_offer_unselected.svg',
+                //       ),
+                //       Spacer(),
+                //       Text(
+                //         'Make an offer',
+                //         style: TextStyle(color: kofferColor),
+                //       ),
+                //       Spacer(),
+                //     ],
+                //   ),
+                // ),
+                OfferToggler(buttonController: _buttonController),
+                Obx(
+                  () => !_buttonController.isExpanded.value
+                      ? _chatInput()
+                      : const SizedBox(),
+                )
                 // if (_showEmoji)
                 //   SizedBox(
                 //     height: mq.height * .35,
