@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../constants/constants.dart';
@@ -23,9 +24,32 @@ class OfferToggler extends StatelessWidget {
       children: [
         Obx(
           () => !_buttonController.isExpanded.value
-              ? MaterialButton(
-                  onPressed: _buttonController.toggleContainer,
-                  child: const Text('Open Container'),
+              ? GestureDetector(
+                  onTap: _buttonController.toggleContainer,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
+                    width: mq.width * .4,
+                    height: mq.height * .08,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kofferColor),
+                      color: const Color(0xffffffff),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'assets/icons/make_offer_unselected.svg',
+                        ),
+                        const Spacer(),
+                        Text(
+                          'Make an offer',
+                          style: TextStyle(color: kofferColor),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
                 )
               : const SizedBox(height: 16),
         ),

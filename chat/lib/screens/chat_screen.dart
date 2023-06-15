@@ -192,30 +192,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 SizedBox(height: mq.height * .01),
-                // Container(
-                //   padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
-                //   width: mq.width * .4,
-                //   height: mq.height * .08,
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: kofferColor),
-                //     color: Color(0xffffffff),
-                //     borderRadius: BorderRadius.circular(20),
-                //   ),
-                //   child: Row(
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       SvgPicture.asset(
-                //         'assets/icons/make_offer_unselected.svg',
-                //       ),
-                //       Spacer(),
-                //       Text(
-                //         'Make an offer',
-                //         style: TextStyle(color: kofferColor),
-                //       ),
-                //       Spacer(),
-                //     ],
-                //   ),
-                // ),
+                
                 OfferToggler(buttonController: _buttonController),
                 Obx(
                   () => !_buttonController.isExpanded.value

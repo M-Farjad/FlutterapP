@@ -40,11 +40,12 @@ class _ChatUserCardState extends State<ChatUserCard> {
               //!for removing unnecessary corners in images
               borderRadius: BorderRadius.circular(mq.height * 0.3),
               child: CircleAvatar(
-                  backgroundColor: kdpColor,
-                  child: Icon(
-                    CupertinoIcons.person,
-                    color: kIconColor,
-                  )),
+                backgroundColor: kdpColor,
+                child: Icon(
+                  CupertinoIcons.person,
+                  color: kIconColor,
+                ),
+              ),
             ),
           ),
           //user name
