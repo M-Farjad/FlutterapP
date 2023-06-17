@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -34,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -42,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -50,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -58,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -66,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "we will make it together",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user2",
       sent: "1681932499129",
     ),
@@ -75,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
           "Hello! my name is Farjad what can I do for you, if you want any kind of assistance then do lemme know",
       toID: "user2",
       read: "true",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user1",
       sent: "1681932499129",
     ),
@@ -83,7 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
       msg: "Hi How are you",
       toID: "user1",
       read: "false",
-      type: MessageType.text,
+      type: MsgType.text,
       fromID: "user3",
       sent: "1681932499129",
     ),
@@ -163,7 +163,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 //     },
                 //   ),
                 // ),
-                Flexible(
+                Expanded(
                   child: (_list.isNotEmpty)
                       ? ListView.builder(
                           reverse: true,
@@ -192,7 +192,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 SizedBox(height: mq.height * .01),
-                
+
                 OfferToggler(buttonController: _buttonController),
                 Obx(
                   () => !_buttonController.isExpanded.value

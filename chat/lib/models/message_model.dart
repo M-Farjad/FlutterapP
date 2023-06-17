@@ -12,15 +12,15 @@ class MessageModel {
   late final String read;
   late final String fromID;
   late final String sent;
-  late final MessageType type;
+  late final MsgType type;
 
   MessageModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'].toString();
     toID = json['toID'].toString();
     read = json['read'].toString();
-    type = json['type'].toString() == MessageType.file.name
-        ? MessageType.file
-        : MessageType.text;
+    type = json['type'].toString() == MsgType.file.name
+        ? MsgType.file
+        : MsgType.text;
     fromID = json['fromID'].toString();
     sent = json['sent'].toString();
   }
@@ -37,4 +37,4 @@ class MessageModel {
   }
 }
 
-enum MessageType { file, text }
+enum MsgType { file, text }

@@ -55,7 +55,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
             children: [
               Icon(
                 _message != null
-                    ? (_message!.type == MessageType.file
+                    ? (_message!.type == MsgType.file
                         ? Icons.image_outlined
                         : Icons.short_text_outlined)
                     : Icons.info_outline_rounded,
@@ -66,7 +66,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
                 //Cz The Text was going out of space
                 child: Text(
                   _message != null
-                      ? (_message!.type == MessageType.file
+                      ? (_message!.type == MsgType.file
                           ? 'image'
                           : _message!.msg)
                       : widget.user.about,

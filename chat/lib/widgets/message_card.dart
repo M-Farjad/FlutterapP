@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:custom_clippers/custom_clippers.dart';
 
 import '../constants/constants.dart';
 import '../helper/my_date_util.dart';
@@ -39,36 +37,46 @@ class _MessageCardState extends State<MessageCard> {
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(
-                        vertical: mq.height * .02, horizontal: mq.width * .04),
-                    padding: EdgeInsets.all(
-                        widget.message.type == MessageType.file
-                            ? mq.width * .03
-                            : mq.width * 0.04),
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: kSecondaryMessageColor, width: 2),
-                        color: kPrimaryColor,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        )),
-                    child: widget.message.type == MessageType.file
-                        ? Container(
-                            color: Colors.red,
-                            width: 10,
-                          ) //still needs to implement for files
-                        : Text(
-                            widget.message.msg,
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.black87),
-                          ),
+                        vertical: mq.height * .02, horizontal: mq.width * .01),
+                    child: ClipPath(
+                      clipper: UpperNipMessageClipperTwo(
+                        MessageType.receive,
+                        nipWidth: 8,
+                        nipHeight: 5,
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(
+                            widget.message.type == MsgType.file
+                                ? mq.width * .03
+                                : mq.width * 0.04),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: kSecondaryMessageColor, width: 2),
+                          color: kPrimaryColor,
+                          // borderRadius: const BorderRadius.only(
+                          //   topLeft: Radius.circular(15),
+                          //   topRight: Radius.circular(15),
+                          //   bottomRight: Radius.circular(15),
+                          // ),
+                        ),
+                        child: widget.message.type == MsgType.file
+                            ? Container(
+                                color: Colors.red,
+                                width: 10,
+                              ) //still needs to implement for files
+                            : Text(
+                                widget.message.msg,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Colors.black87),
+                              ),
+                      ),
+                    ),
                   ),
                   Positioned(
                     bottom: 0,
                     right: 20,
                     child: Transform.translate(
-                      offset: Offset(0, 8),
+                      offset: const Offset(0, 8),
                       child: Text(
                         MyDateUtil.getFormattedTime(
                             context: context, time: widget.message.sent),
@@ -80,7 +88,7 @@ class _MessageCardState extends State<MessageCard> {
                 ],
               ),
             ),
-            Icon(Icons.more_horiz_rounded),
+            const Icon(Icons.more_horiz_rounded),
           ],
         ),
       ],
@@ -146,26 +154,26 @@ class _MessageCardState extends State<MessageCard> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(Icons.more_horiz_rounded),
+            const Icon(Icons.more_horiz_rounded),
             Flexible(
               child: Stack(
                 children: [
                   Container(
                     margin: EdgeInsets.symmetric(
                         vertical: mq.height * .02, horizontal: mq.width * .04),
-                    padding: EdgeInsets.all(
-                        widget.message.type == MessageType.file
-                            ? mq.width * .03
-                            : mq.width * 0.04),
+                    padding: EdgeInsets.all(widget.message.type == MsgType.file
+                        ? mq.width * .03
+                        : mq.width * 0.04),
                     decoration: BoxDecoration(
-                        border: Border.all(color: kTextColor, width: 2),
-                        color: Colors.transparent,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                        )),
-                    child: widget.message.type == MessageType.file
+                      border: Border.all(color: kTextColor, width: 2),
+                      color: Colors.transparent,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      ),
+                    ),
+                    child: widget.message.type == MsgType.file
                         ? Container(
                             color: Colors.red,
                             width: 10,

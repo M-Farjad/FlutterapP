@@ -32,7 +32,7 @@ class OfferToggler extends StatelessWidget {
                     height: mq.height * .08,
                     decoration: BoxDecoration(
                       border: Border.all(color: kofferColor),
-                      color: const Color(0xffffffff),
+                      color: kWhiteColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
