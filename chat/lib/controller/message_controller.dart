@@ -96,6 +96,5 @@ class MessageController extends GetxController {
   void addMessage(MessageModel message) {
     _list.insert(0, message);
     update(); // Notify the UI that the list has been updated
-    log('offer added');
   }
 }

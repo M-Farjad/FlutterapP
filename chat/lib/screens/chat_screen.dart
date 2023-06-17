@@ -19,9 +19,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final ButtonController _buttonController = Get.put(ButtonController());
-  final MessageController _msgController = Get.put(MessageController());
+  // final ButtonController _buttonController = Get.put(ButtonController());
+  // final MessageController _msgController = Get.put(MessageController());
 
+  final ButtonController _buttonController = Get.find<ButtonController>();
+  final MessageController _msgController = Get.find<MessageController>();
   // _showEmoji for showing the value of showing or hiding emoji
   //_isUploading for checking if image is uploading or not
   bool _sendFile = false;

@@ -46,7 +46,7 @@ class ButtonController extends GetxController
         msg: 'First Offer',
         toID: "user1",
         read: "false",
-        type: MsgType.text,
+        type: MsgType.offer,
         fromID: "user2",
         sent: "1681932499129",
       ),
