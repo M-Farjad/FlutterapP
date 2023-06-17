@@ -1,13 +1,13 @@
 import 'package:chat/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../controller/message_controller.dart';
 import '../controller/offer_btn_controller.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
-import '../models/message_model.dart';
+// import '../models/message_model.dart';
 import '../widgets/chat_offer_toggler.dart';
 import '../widgets/message_card.dart';
 
@@ -20,74 +20,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final ButtonController _buttonController = Get.put(ButtonController());
+  final MessageController _msgController = Get.put(MessageController());
 
-  final List<MessageModel> _list = [
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "we will make it together",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user2",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg:
-          "Hello! my name is Farjad what can I do for you, if you want any kind of assistance then do lemme know",
-      toID: "user2",
-      read: "true",
-      type: MsgType.text,
-      fromID: "user1",
-      sent: "1681932499129",
-    ),
-    MessageModel(
-      msg: "Hi How are you",
-      toID: "user1",
-      read: "false",
-      type: MsgType.text,
-      fromID: "user3",
-      sent: "1681932499129",
-    ),
-  ];
   // _showEmoji for showing the value of showing or hiding emoji
   //_isUploading for checking if image is uploading or not
   bool _sendFile = false;
@@ -139,19 +73,19 @@ class _ChatScreenState extends State<ChatScreen> {
                 //         case ConnectionState.active:
                 //         case ConnectionState.done:
                 //           final data = snapshot.data?.docs;
-                //           _list = data
+                //           _msgController.list = data
                 //                   ?.map((e) => MessageModel.fromJson(e.data()))
                 //                   .toList() ??
                 //               [];
-                //           if (_list.isNotEmpty) {
+                //           if (_msgController.list.isNotEmpty) {
                 //             return ListView.builder(
                 //               reverse: true,
-                //               itemCount: _list.length,
+                //               itemCount: _msgController.list.length,
                 //               padding: EdgeInsets.symmetric(
                 //                   vertical: mq.height * 0.01),
                 //               physics: const BouncingScrollPhysics(),
                 //               itemBuilder: (context, index) {
-                //                 return MessageCard(message: _list[index]);
+                //                 return MessageCard(message: _msgController.list[index]);
                 //               },
                 //             );
                 //           } else {
@@ -164,19 +98,21 @@ class _ChatScreenState extends State<ChatScreen> {
                 //   ),
                 // ),
                 Expanded(
-                  child: (_list.isNotEmpty)
-                      ? ListView.builder(
-                          reverse: true,
-                          itemCount: _list.length,
-                          padding:
-                              EdgeInsets.symmetric(vertical: mq.height * 0.01),
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return MessageCard(
-                              message: _list[index],
-                              index: index,
-                            );
-                          },
+                  child: (_msgController.list.isNotEmpty)
+                      ? Obx(
+                          () => ListView.builder(
+                            reverse: true,
+                            itemCount: _msgController.list.length,
+                            padding: EdgeInsets.symmetric(
+                                vertical: mq.height * 0.01),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return MessageCard(
+                                message: _msgController.list[index],
+                                index: index,
+                              );
+                            },
+                          ),
                         )
                       : const Center(
                           child: Text('Say Hii ... 🤭',

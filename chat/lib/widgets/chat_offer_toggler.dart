@@ -3,17 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../constants/constants.dart';
+import '../controller/message_controller.dart';
 import '../controller/offer_btn_controller.dart';
 import '../main.dart';
 import 'chat_offer_btn.dart';
 import 'chat_offer_container.dart';
 
 class OfferToggler extends StatelessWidget {
-  const OfferToggler({
+  OfferToggler({
     super.key,
     required ButtonController buttonController,
   }) : _buttonController = buttonController;
-
   final ButtonController _buttonController;
 
   @override

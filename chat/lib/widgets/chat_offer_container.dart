@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constants/constants.dart';
+import '../controller/message_controller.dart';
 import '../controller/offer_btn_controller.dart';
 import '../main.dart';
+import '../models/message_model.dart';
 import 'custom_amount_button.dart';
 import 'offer_custom_texts.dart';
 
@@ -12,7 +14,7 @@ class ChatOfferContainer extends StatelessWidget {
     super.key,
     required ButtonController buttonController,
   }) : _buttonController = buttonController;
-
+  final MessageController _msgController = Get.find<MessageController>();
   final ButtonController _buttonController;
 
   @override
@@ -187,6 +189,16 @@ class ChatOfferContainer extends StatelessWidget {
                                       child: ElevatedButton(
                                         onPressed: () {
                                           // _buttonController.toggleCustom();
+                                          _msgController.addMessage(
+                                            MessageModel(
+                                              msg: 'First Offer',
+                                              toID: "user1",
+                                              read: "false",
+                                              type: MsgType.text,
+                                              fromID: "user2",
+                                              sent: "1681932499129",
+                                            ),
+                                          );
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(

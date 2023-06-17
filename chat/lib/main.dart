@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'controller/message_controller.dart';
+
 late Size mq;
 
 void main() {
@@ -35,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomeScreen(),
+      initialBinding: BindingsBuilder(() {
+        Get.put(MessageController());
+      }),
     );
   }
 }
