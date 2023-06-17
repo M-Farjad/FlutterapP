@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/message_model.dart';
+import 'message_controller.dart';
+
 class ButtonController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  final MessageController _msgController = Get.find<MessageController>();
+
   RxBool isExpanded = false.obs;
   RxBool isCatBtnToggled = true.obs;
   RxBool isCustomBtnToggled = false.obs;
@@ -33,6 +38,21 @@ class ButtonController extends GetxController
         animationController!.reverse();
       }
     });
+  }
+
+  void sendOffer() {
+    _msgController.addMessage(
+      MessageModel(
+        msg: 'First Offer',
+        toID: "user1",
+        read: "false",
+        type: MsgType.text,
+        fromID: "user2",
+        sent: "1681932499129",
+      ),
+    );
+    toggleContainer();
+    toggleOffer();
   }
 
   void toggleOffer() {

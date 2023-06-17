@@ -12,9 +12,8 @@ import 'chat_offer_container.dart';
 class OfferToggler extends StatelessWidget {
   OfferToggler({
     super.key,
-    required ButtonController buttonController,
-  }) : _buttonController = buttonController;
-  final ButtonController _buttonController;
+  });
+  final ButtonController _buttonController = Get.find<ButtonController>();
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +105,8 @@ class OfferToggler extends StatelessWidget {
                 Obx(
                   () => _buttonController.isExpanded.value
                       ? _buttonController.isCatBtnToggled.value
-                          ? ChatOfferContainer(
-                              buttonController: _buttonController)
-                          : ChatOfferContainer(
-                              buttonController: _buttonController)
+                          ? ChatOfferContainer()
+                          : ChatOfferContainer()
                       : const SizedBox(),
                 ),
               ],

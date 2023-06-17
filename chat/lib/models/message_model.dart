@@ -37,4 +37,4 @@ class MessageModel {
   }
 }
 
-enum MsgType { file, text }
+enum MsgType { file, text, offer }

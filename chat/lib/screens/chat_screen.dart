@@ -97,26 +97,26 @@ class _ChatScreenState extends State<ChatScreen> {
                 //     },
                 //   ),
                 // ),
-                Expanded(
-                  child: (_msgController.list.isNotEmpty)
-                      ? Obx(
-                          () => ListView.builder(
+                Obx(
+                  () => Expanded(
+                    child: (_msgController.list.isNotEmpty)
+                        ? ListView.builder(
                             reverse: true,
                             itemCount: _msgController.list.length,
                             padding: EdgeInsets.symmetric(
                                 vertical: mq.height * 0.01),
-                            physics: const BouncingScrollPhysics(),
+                            // physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return MessageCard(
                                 message: _msgController.list[index],
                                 index: index,
                               );
                             },
-                          ),
-                        )
-                      : const Center(
-                          child: Text('Say Hii ... 🤭',
-                              style: TextStyle(fontSize: 20))),
+                          )
+                        : const Center(
+                            child: Text('Say Hii ... 🤭',
+                                style: TextStyle(fontSize: 20))),
+                  ),
                 ),
                 if (_isUploading)
                   const Align(
@@ -129,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 SizedBox(height: mq.height * .01),
 
-                OfferToggler(buttonController: _buttonController),
+                OfferToggler(),
                 Obx(
                   () => !_buttonController.isExpanded.value
                       ? _chatInput()

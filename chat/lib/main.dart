@@ -1,3 +1,4 @@
+import '../controller/offer_btn_controller.dart';
 import 'package:chat/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       initialBinding: BindingsBuilder(() {
         Get.put(MessageController());
+        Get.put(ButtonController());
       }),
     );
   }
