@@ -29,7 +29,7 @@ class _MessageCardState extends State<MessageCard> {
   //!Sender or Another user message
   Widget _othersMessage() {
     return widget.message.type == MsgType.offer
-        ? SizedBox() //Offer Container
+        ? const SizedBox() //Offer Container
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -189,15 +189,36 @@ class _MessageCardState extends State<MessageCard> {
                                           topRight: Radius.circular(15),
                                         ),
                                       ),
-                                      height: mq.height * .1,
+                                      // height: mq.height * .1,
                                       width: double.infinity,
-                                      child: Text(
-                                        'You Offered Rs ${_btnController.offerAmountEditingController.text}',
-                                        style: TextStyle(
-                                            // overflow: TextOverflow.fade,
-                                            fontSize: 18,
-                                            color: kofferColor,
-                                            fontWeight: FontWeight.bold),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'You Offered Rs ${_btnController.offerAmountEditingController.text}',
+                                            style: TextStyle(
+                                                // overflow: TextOverflow.fade,
+                                                fontSize: 18,
+                                                color: kofferColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Obx(
+                                            () => _btnController
+                                                    .isViewMoreToggled.value
+                                                ? Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: mq.height * .03),
+                                                    child: Text(
+                                                      _btnController
+                                                          .offerDetailsEditingController
+                                                          .text
+                                                          .toString(),
+                                                    ),
+                                                  )
+                                                : const SizedBox(),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Container(
@@ -219,10 +240,20 @@ class _MessageCardState extends State<MessageCard> {
                                             'Shadi Package',
                                             style: TextStyle(color: kTextColor),
                                           ),
-                                          Text(
-                                            'View More',
-                                            style:
-                                                TextStyle(color: kPrimaryColor),
+                                          Obx(
+                                            () => TextButton(
+                                              child: Text(
+                                                _btnController
+                                                        .isViewMoreToggled.value
+                                                    ? 'View less'
+                                                    : 'View more',
+                                                style: TextStyle(
+                                                    color: kPrimaryColor),
+                                              ),
+                                              onPressed: () {
+                                                _btnController.toggleViewMore();
+                                              },
+                                            ),
                                           )
                                         ],
                                       ),

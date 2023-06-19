@@ -10,6 +10,7 @@ class ButtonController extends GetxController
 
   RxBool isExpanded = false.obs;
   RxBool isCatBtnToggled = true.obs;
+  RxBool isViewMoreToggled = false.obs;
   RxBool isCustomBtnToggled = false.obs;
   AnimationController? animationController;
   late Animation<double> animation;
@@ -53,6 +54,10 @@ class ButtonController extends GetxController
     );
     toggleContainer();
     toggleOffer();
+  }
+
+  void toggleViewMore() {
+    isViewMoreToggled.toggle();
   }
 
   void toggleOffer() {
