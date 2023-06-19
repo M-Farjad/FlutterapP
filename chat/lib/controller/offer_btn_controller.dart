@@ -65,6 +65,10 @@ class ButtonController extends GetxController
     isCustomBtnToggled.toggle();
   }
 
+  String viewMoreLessText() {
+    return isViewMoreToggled.value ? 'View less' : 'View more';
+  }
+
   void toggleCustom() {
     isCustomBtnToggled.toggle();
     isCatBtnToggled.toggle();

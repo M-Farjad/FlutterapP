@@ -244,9 +244,7 @@ class _MessageCardState extends State<MessageCard> {
                                             () => TextButton(
                                               child: Text(
                                                 _btnController
-                                                        .isViewMoreToggled.value
-                                                    ? 'View less'
-                                                    : 'View more',
+                                                    .viewMoreLessText(),
                                                 style: TextStyle(
                                                     color: kPrimaryColor),
                                               ),
