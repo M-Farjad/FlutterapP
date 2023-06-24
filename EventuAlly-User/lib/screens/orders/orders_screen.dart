@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+late Size mq;
+
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(CupertinoIcons.back),
         centerTitle: true,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
           'Your Orders',
@@ -21,71 +25,57 @@ class OrdersScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: 142,
-                height: 37,
-                decoration: ShapeDecoration(
-                  color: Color(0xFF34A853),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x3F4285F4),
-                      blurRadius: 12,
-                      offset: Offset(0, 4),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    'Active orders',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.18,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w700,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: mq.width * .1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 4,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mq.width * .06,
+                          vertical: mq.height * .03),
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Text(
+                      'Active orders',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Manrope'),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                width: 139.42,
-                height: 37.81,
-                decoration: ShapeDecoration(
-                  color: Color(0xFFCB585A),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0x3F4285F4),
-                      blurRadius: 12,
-                      offset: Offset(0, 4),
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    'All orders',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.18,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w700,
+                SizedBox(width: mq.width * .05),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 4,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mq.width * .08,
+                          vertical: mq.height * .03),
+                      backgroundColor: Colors.grey,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Text(
+                      'All orders',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
-              ),
-            ],
-          )
+              ],
+            ),
+          ),
         ],
       ), // TODO add orders list here
     );
