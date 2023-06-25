@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/login.dart';
 import '../screens/onboard.dart';
 import '../screens/otp_verification.dart';
-import 'package:eventually_user/screens/home_page/home_page.dart';
 import '../screens/signup.dart';
 // import '../widget/textfield.dart';
 import 'bindings/allControllerBindings.dart';
