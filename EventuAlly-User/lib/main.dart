@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/otpverification', page: () => const OtpVerification()),
         GetPage(name: '/forgetpassword', page: () => const ForgetPassword()),
         GetPage(name: '/homepage', page: () => const HomePage()),
-        GetPage(name: '/order', page: () => const OrdersScreen()),
+        GetPage(name: '/order', page: () => OrdersScreen()),
         GetPage(name: '/orderstatus', page: () => const OrderStatusScreen()),
       ],
       initialRoute: isViewed != 0 ? '/onboard' : '/login',

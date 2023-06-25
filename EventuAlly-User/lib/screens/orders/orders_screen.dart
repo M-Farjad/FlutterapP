@@ -1,13 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/order_btn_controller.dart';
 
 late Size mq;
 
 class OrdersScreen extends StatelessWidget {
-  const OrdersScreen({super.key});
+  OrdersScreen({super.key});
+  final OrdersBtnController controller = Get.put(OrdersBtnController());
 
   @override
   Widget build(BuildContext context) {
+    if (controller.isFirstButtonActive.value) {
+      controller.setActiveButtonColor();
+    } else {
+      controller.setAllButtonColor();
+    }
     mq = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -31,46 +40,23 @@ class OrdersScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 4,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: mq.width * .06,
-                          vertical: mq.height * .03),
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: const Text(
-                      'Active orders',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Manrope'),
-                    ),
+                Obx(
+                  () => ListOrderButton(
+                    title: 'Active Orders',
+                    color: controller.activeButtonColor.value,
+                    onpressed: () {
+                      controller.setActiveButtonColor();
+                    },
                   ),
                 ),
                 SizedBox(width: mq.width * .05),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 4,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: mq.width * .08,
-                          vertical: mq.height * .03),
-                      backgroundColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: const Text(
-                      'All orders',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                Obx(
+                  () => ListOrderButton(
+                    title: 'All Orders',
+                    color: controller.allButtonColor.value,
+                    onpressed: () {
+                      controller.setAllButtonColor();
+                    },
                   ),
                 ),
               ],
@@ -78,6 +64,40 @@ class OrdersScreen extends StatelessWidget {
           ),
         ],
       ), // TODO add orders list here
+    );
+  }
+}
+
+class ListOrderButton extends StatelessWidget {
+  const ListOrderButton({
+    super.key,
+    required this.onpressed,
+    required this.color,
+    required this.title,
+  });
+  final VoidCallback onpressed;
+  final Color color;
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: onpressed,
+        style: ElevatedButton.styleFrom(
+          elevation: 4,
+          padding: EdgeInsets.symmetric(
+              horizontal: mq.width * .06, vertical: mq.height * .03),
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: Text(
+          title,
+          style: const TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'Manrope'),
+        ),
+      ),
     );
   }
 }
