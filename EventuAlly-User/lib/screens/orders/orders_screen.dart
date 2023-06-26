@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/order_btn_controller.dart';
 import '../../widget/text_appbar.dart';
+import 'components/all_orders.dart';
 import 'components/button.dart';
 import 'components/order_card.dart';
 
@@ -55,11 +56,16 @@ class OrdersScreen extends StatelessWidget {
             ),
           ),
           SizedBox(height: mq.height * .01),
-          Expanded(
-              child: ListView.builder(
-            itemCount: 4,
-            itemBuilder: (context, index) => const OrderCard(),
-          ))
+          Obx(
+            () => controller.isFirstButtonActive.value
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: 4,
+                      itemBuilder: (context, index) => const OrderCard(),
+                    ),
+                  )
+                : const AllOrders(),
+          )
         ],
       ), // TODO add orders list here
     );
