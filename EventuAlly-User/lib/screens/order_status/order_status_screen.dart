@@ -19,19 +19,59 @@ class OrderStatusScreen extends StatelessWidget {
       appBar: const TextAppBar(title: 'Order Details'),
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mq.width * .2),
+        padding: EdgeInsets.symmetric(horizontal: mq.width * .08),
         child: Center(
           child: Column(
             children: [
-              Text('Order Status', style: constant.kTextStyle),
-              StepProgressIndicator(
-                totalSteps: 3,
-                currentStep: 1,
-                size: mq.height * .08,
-                padding: mq.width * .006,
-                selectedColor: Color(constant.red),
-                unselectedColor: Colors.grey,
-                customStep: makeProgressSteps,
+              Text('Order Status', style: kBlackTextStyle),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: mq.width * .02, vertical: mq.height * .02),
+                child: StepProgressIndicator(
+                  totalSteps: 3,
+                  currentStep: 1,
+                  size: mq.height * .08,
+                  padding: mq.width * .006,
+                  selectedColor: Color(constant.red),
+                  unselectedColor: Colors.grey,
+                  customStep: makeProgressSteps,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                height: mq.height * .3,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    'assets/images/caterers.jpg',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              Text(
+                'Shadi Package',
+                style: TextStyle(
+                  color: Color(constant.black),
+                  fontSize: 24,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Text('Order Number: 098765', style: kRedTextStyle),
+              const Text(
+                'Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard. Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard.',
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  color: Color(0xFF555454),
+                  fontSize: 12,
+                  fontFamily: 'Manrope',
+                  fontWeight: FontWeight.w500,
+                ),
               )
             ],
           ),
