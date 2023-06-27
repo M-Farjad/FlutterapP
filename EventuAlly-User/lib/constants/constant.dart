@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Constant {
   var font = 'Manrope';
   var onboardingFont = 'signika';
@@ -6,7 +8,12 @@ class Constant {
   int white = 0xFFFFFFFF;
   // int background = 0xFFFAFAFA;
   int grey = 0xFF555555;
-
+  TextStyle kTextStyle = const TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w800,
+  );
   // page indicator colors:
   List<int> pageIndicator = [0xFFBBDEFF, 0xFFFFD4A1, 0xFFC6F988];
 }

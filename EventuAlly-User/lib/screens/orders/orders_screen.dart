@@ -24,7 +24,7 @@ class OrdersScreen extends StatelessWidget {
     }
     mq = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: const TextAppBar(),
+      appBar: const TextAppBar(title: 'Your Orders'),
       body: Column(
         children: [
           Container(
