@@ -72,6 +72,132 @@ class OrderStatusScreen extends StatelessWidget {
                   fontFamily: 'Manrope',
                   fontWeight: FontWeight.w500,
                 ),
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Price',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0x7F555454),
+                      fontSize: 12,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    'Person',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Color(0x7F555454),
+                      fontSize: 12,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )
+                ],
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '50,000 Rs',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0xFF555454),
+                      fontSize: 24,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    '100',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      color: Color(0xFF555454),
+                      fontSize: 24,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )
+                ],
+              ),
+              const Row(
+                children: [
+                  Text(
+                    'Date',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0xFF555454),
+                      fontSize: 14,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      '21/05/2023',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFFCB585A),
+                        fontSize: 16,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const Row(
+                children: [
+                  Text(
+                    'Location',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0xFF555454),
+                      fontSize: 14,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 258,
+                    child: Text(
+                      'XYZ building XZ block, Latifabad, Hyd. ',
+                      style: TextStyle(
+                        color: Color(0xFFCB585A),
+                        fontSize: 16,
+                        fontFamily: 'Manrope',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              const Row(
+                children: [
+                  Text(
+                    'Duration',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0xFF555454),
+                      fontSize: 14,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    '6:00 pm to 12:00 am',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Color(0xFFCB585A),
+                      fontSize: 16,
+                      fontFamily: 'Manrope',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  )
+                ],
               )
             ],
           ),
