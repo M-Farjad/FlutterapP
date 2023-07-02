@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../controllers/order_pic_controller.dart';
 import '../../widget/text_appbar.dart';
 import '../../constants/constant.dart';
 import '../orders/orders_screen.dart';
@@ -12,6 +16,7 @@ class OrderStatusScreen extends StatelessWidget {
     'Order Completed',
     'Verification Pending'
   ];
+  OrderPicController orderPicController = Get.put(OrderPicController());
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -40,58 +45,43 @@ class OrderStatusScreen extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: double.infinity,
-                    height: mq.height * .3,
+                    height: mq.height *
+                        0.3, // Set a specific height for the PageView
                     decoration: ShapeDecoration(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/images/caterers.jpg',
-                        fit: BoxFit.fill,
+                    child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      onPageChanged: (index) {
+                        orderPicController.index.value = index;
+                      },
+                      itemBuilder: (context, index) => Container(
+                        width: double.infinity,
+                        height: mq.height * .3,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            'assets/images/caterers.jpg',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  Positioned(
-                      bottom: 8,
-                      right: 0,
-                      left: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: mq.width * .01),
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFFCB585A),
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          Container(
-                            width: 7,
-                            height: 7,
-                            decoration: const ShapeDecoration(
-                              color: Colors.white,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: mq.width * .01),
-                            decoration: const ShapeDecoration(
-                              color: Colors.white,
-                              shape: OvalBorder(),
-                            ),
-                          ),
-                        ],
-                      )),
+                  const Positioned(
+                    bottom: 8,
+                    right: 0,
+                    left: 0,
+                    child: ImageCounterRow(),
+                  ),
                 ],
               ),
               Text(
@@ -285,6 +275,46 @@ class OrderStatusScreen extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class ImageCounterRow extends StatelessWidget {
+  const ImageCounterRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        DotContainer(index: 0),
+        DotContainer(index: 1),
+        DotContainer(index: 2)
+      ],
+    );
+  }
+}
+
+class DotContainer extends StatelessWidget {
+  OrderPicController orderPicController = Get.find<OrderPicController>();
+  DotContainer({Key? key, required this.index}) : super(key: key);
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        width: 7,
+        height: 7,
+        margin: EdgeInsets.symmetric(horizontal: mq.width * 0.01),
+        decoration: ShapeDecoration(
+          color: orderPicController.index.value == index
+              ? Color(constant.red)
+              : Color(constant.white),
+          shape: const CircleBorder(),
+        ),
+      ),
     );
   }
 }
