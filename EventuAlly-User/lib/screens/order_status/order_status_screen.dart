@@ -8,6 +8,11 @@ import '../../controllers/order_pic_controller.dart';
 import '../../widget/text_appbar.dart';
 import '../../constants/constant.dart';
 import '../orders/orders_screen.dart';
+import 'components/dot_container.dart';
+import 'components/image_counter_row.dart';
+import 'components/order_date.dart';
+import 'components/order_duration.dart';
+import 'components/order_location.dart';
 
 class OrderStatusScreen extends StatelessWidget {
   OrderStatusScreen({super.key});
@@ -157,90 +162,9 @@ class OrderStatusScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: mq.height * .015),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: mq.width * .16,
-                    child: const Text(
-                      'Date',
-                      style: TextStyle(
-                        color: Color(0xFF555454),
-                        fontSize: 14,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const Expanded(
-                    child: Text(
-                      '21/05/2023',
-                      style: TextStyle(
-                        color: Color(0xFFCB585A),
-                        fontSize: 16,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: mq.width * .16,
-                    child: const Text(
-                      'Location',
-                      style: TextStyle(
-                        color: Color(0xFF555454),
-                        fontSize: 14,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 258,
-                    child: Text(
-                      'XYZ building XZ block, Latifabad, Hyd. ',
-                      style: TextStyle(
-                        color: Color(0xFFCB585A),
-                        fontSize: 16,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: mq.width * .16,
-                    child: const Text(
-                      'Duration',
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        color: Color(0xFF555454),
-                        fontSize: 14,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const Text(
-                    '6:00 pm to 12:00 am',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      color: Color(0xFFCB585A),
-                      fontSize: 16,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  )
-                ],
-              )
+              const OrderDate(),
+              const OrderLocation(),
+              const OrderDuration()
             ],
           ),
         ),
@@ -275,46 +199,6 @@ class OrderStatusScreen extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class ImageCounterRow extends StatelessWidget {
-  const ImageCounterRow({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        DotContainer(index: 0),
-        DotContainer(index: 1),
-        DotContainer(index: 2)
-      ],
-    );
-  }
-}
-
-class DotContainer extends StatelessWidget {
-  OrderPicController orderPicController = Get.find<OrderPicController>();
-  DotContainer({Key? key, required this.index}) : super(key: key);
-  final int index;
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
-        width: 7,
-        height: 7,
-        margin: EdgeInsets.symmetric(horizontal: mq.width * 0.01),
-        decoration: ShapeDecoration(
-          color: orderPicController.index.value == index
-              ? Color(constant.red)
-              : Color(constant.white),
-          shape: const CircleBorder(),
-        ),
-      ),
     );
   }
 }
