@@ -26,7 +26,7 @@ class OrdersScreen extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: mq.width * .1),
+            padding: EdgeInsets.symmetric(horizontal: mq.width * .06),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,

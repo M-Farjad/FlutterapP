@@ -336,7 +336,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18),
                           ),
-                          shadows: shadows,
+                          shadows: shadowsBelow,
                         ),
                         child: const Center(
                           child: Text(

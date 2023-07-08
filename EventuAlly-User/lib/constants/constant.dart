@@ -28,10 +28,18 @@ TextStyle kRedTextStyle = TextStyle(
   fontWeight: FontWeight.w800,
 );
 
-List<BoxShadow>? shadows = [
+List<BoxShadow>? shadowsBelow = [
   BoxShadow(
     color: Color(0x0C1C252C),
     blurRadius: 8,
+    offset: Offset(0, 4),
+    spreadRadius: 0,
+  )
+];
+List<BoxShadow>? shadowsAbove = [
+  BoxShadow(
+    color: Color(0x26000000),
+    blurRadius: 15,
     offset: Offset(0, 4),
     spreadRadius: 0,
   )

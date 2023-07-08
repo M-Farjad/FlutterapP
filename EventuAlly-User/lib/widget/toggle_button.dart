@@ -10,7 +10,7 @@ class ToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ToggleButtonController>();
+    final controller = Get.put(ToggleButtonController());
 
     return SizedBox(
       width: mq.width * .08,
@@ -32,7 +32,7 @@ class ToggleButton extends StatelessWidget {
                 color: controller.isToggled.value
                     ? Color(constant.red)
                     : Colors.transparent,
-                shape: const OvalBorder(),
+                shape: const CircleBorder(),
               ),
             ),
           ),

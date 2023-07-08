@@ -41,7 +41,7 @@ class DurationButton extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          shadows: shadows,
+          shadows: shadowsBelow,
         ),
         child: InkWell(
           onTap: () => _selectTime(context),

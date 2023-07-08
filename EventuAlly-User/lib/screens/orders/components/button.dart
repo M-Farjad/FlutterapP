@@ -19,8 +19,8 @@ class ListOrderButton extends StatelessWidget {
         onPressed: onpressed,
         style: ElevatedButton.styleFrom(
           elevation: 4,
-          padding: EdgeInsets.symmetric(
-              horizontal: mq.width * .06, vertical: mq.height * .03),
+          padding:
+              EdgeInsets.symmetric(horizontal: mq.width * .06, vertical: 10),
           backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
