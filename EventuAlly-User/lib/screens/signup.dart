@@ -121,7 +121,11 @@ class _signupState extends State<signup> {
                 width: width * 0.4,
                 height: height * 0.06,
                 margin: EdgeInsets.fromLTRB(0.0, height * 0.035, 0.0, 0.0),
-                child: Button(label: 'Create Account'),
+                child: Button(
+                    label: 'Create Account',
+                    onPressed: () {
+                      Get.toNamed('/homepage');
+                    }),
               ),
               SizedBox(height: height * 0.03),
               Row(

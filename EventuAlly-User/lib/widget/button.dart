@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Button extends StatefulWidget {
-  String label;
-  Button({super.key, required this.label});
+  final String label;
+  final VoidCallback onPressed;
+  const Button({super.key, required this.label, required this.onPressed});
 
   @override
   State<Button> createState() => _ButtonState();
@@ -16,9 +17,7 @@ class _ButtonState extends State<Button> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return ElevatedButton(
-      onPressed: () {
-        Get.toNamed('/homepage');
-      },
+      onPressed: widget.onPressed,
       /*onPressed: () {
         String? currentRoute = ModalRoute.of(context)?.settings.name;
 

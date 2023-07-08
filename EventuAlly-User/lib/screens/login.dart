@@ -134,6 +134,9 @@ class _LoginState extends State<Login> {
                   // },
                   child: Button(
                     label: 'Login',
+                    onPressed: () {
+                      Get.toNamed('/homepage');
+                    },
                   ),
                 ),
               ),

@@ -50,7 +50,12 @@ class ForgetPassword extends StatelessWidget {
                     ),
                     textFormField(title: 'enter Email'),
                     SizedBox(height: height * .02),
-                    Button(label: 'Enter'),
+                    Button(
+                      label: 'Enter',
+                      onPressed: () {
+                        Get.toNamed('/homepage');
+                      },
+                    ),
                     SizedBox(height: height * .015),
                     Row(
                       children: [

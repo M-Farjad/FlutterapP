@@ -59,7 +59,7 @@ class OrdersScreen extends StatelessWidget {
                 ? Expanded(
                     child: ListView.builder(
                       itemCount: 4,
-                      itemBuilder: (context, index) => const OrderCard(),
+                      itemBuilder: (context, index) => OrderCard(),
                     ),
                   )
                 : const AllOrders(),

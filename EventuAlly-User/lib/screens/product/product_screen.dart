@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../controllers/order_pic_controller.dart';
+import '../../widget/button.dart';
 import '../../widget/price_people_text.dart';
 import '../../widget/product_categories.dart';
 import '../../widget/product_image_view.dart';
@@ -17,7 +18,7 @@ import 'components/change_people_count_row.dart';
 import 'components/duration_button.dart';
 
 class ProductScreen extends StatefulWidget {
-  ProductScreen({super.key});
+  const ProductScreen({super.key});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -304,33 +305,17 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: mq.height * .005),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Container(
-                        height: 38,
-                        decoration: ShapeDecoration(
-                          color: Color(constant.red),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          shadows: shadows,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Add to Cart',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.18,
-                              fontFamily: 'Manrope',
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                        child: Button(
+                      label: 'Add to Cart',
+                      onPressed: () {
+                        Get.toNamed('/mycart');
+                      },
+                    )),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
                       child: const Text(

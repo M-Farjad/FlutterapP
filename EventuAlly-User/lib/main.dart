@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/login.dart';
 import '../screens/home_page/home_page.dart';
+import 'screens/cart/cart_screen.dart';
 import 'screens/orders/orders_screen.dart';
 import 'screens/order_status/order_status_screen.dart';
 import '../screens/onboard.dart';
@@ -79,7 +80,7 @@ class MyApp extends StatelessWidget {
           ),
           hourMinuteColor: Colors.white,
           hourMinuteTextColor: Color(constant.black),
-          hourMinuteTextStyle: TextStyle(
+          hourMinuteTextStyle: const TextStyle(
             color: Colors.white,
             fontSize: 24,
           ),
@@ -117,6 +118,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/order', page: () => OrdersScreen()),
         GetPage(name: '/orderstatus', page: () => OrderStatusScreen()),
         GetPage(name: '/product', page: () => ProductScreen()),
+        GetPage(name: '/mycart', page: () => CartScreen()),
       ],
       initialRoute: isViewed != 0 ? '/onboard' : '/login',
       // routes: {
