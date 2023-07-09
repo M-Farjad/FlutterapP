@@ -2,6 +2,7 @@ import 'package:eventually_user/constants/constant.dart';
 import 'package:eventually_user/widget/all_widgets.dart';
 import 'package:eventually_user/widget/text_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widget/toggle_button.dart';
 import '../home_page/home_page.dart';
@@ -68,7 +69,9 @@ class CartScreen extends StatelessWidget {
                 Expanded(
                   child: Button(
                     label: 'Proceed',
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('/order_confirmation');
+                    },
                   ),
                 ),
               ],

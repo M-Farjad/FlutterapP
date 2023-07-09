@@ -44,91 +44,86 @@ class OrderCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: mq.height * .01),
-                    Container(
-                      padding: EdgeInsets.zero,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          show == true
-                              ? const ToggleButton()
-                              : const SizedBox(),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              'assets/images/caterers.png',
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        show == true ? const ToggleButton() : const SizedBox(),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            'assets/images/caterers.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
                           ),
-                          SizedBox(width: mq.width * .03),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Shadi Package',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.w800,
-                                  ),
+                        ),
+                        SizedBox(width: mq.width * .03),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Shadi Package',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w800,
                                 ),
-                                const Text(
-                                  'Date : 21-05-2023',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Color(0xFF555454),
-                                    fontSize: 8,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                              ),
+                              const Text(
+                                'Date : 21-05-2023',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Color(0xFF555454),
+                                  fontSize: 8,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                const Text(
-                                  'Location : XYZ building XYZ block, Latifabad, Hyd.',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Color(0xFF555454),
-                                    fontSize: 8,
-                                    fontFamily: 'Manrope',
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                              ),
+                              const Text(
+                                'Location : XYZ building XYZ block, Latifabad, Hyd.',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Color(0xFF555454),
+                                  fontSize: 8,
+                                  fontFamily: 'Manrope',
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                SizedBox(
-                                    height: show != null
-                                        ? mq.height * .02
-                                        : mq.height * .04),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '50,000 Rs',
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                        color: Color(0xFF9C0C0C),
-                                        fontSize: 18,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                              ),
+                              SizedBox(
+                                  height: show != null
+                                      ? mq.height * .02
+                                      : mq.height * .04),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '50,000 Rs',
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      color: Color(0xFF9C0C0C),
+                                      fontSize: 18,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
                                     ),
-                                    Text(
-                                      'per 100 person',
-                                      style: TextStyle(
-                                        color: Color(0xFFA2A2A2),
-                                        fontSize: 9,
-                                        fontFamily: 'Manrope',
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                                  ),
+                                  Text(
+                                    'per 100 person',
+                                    style: TextStyle(
+                                      color: Color(0xFFA2A2A2),
+                                      fontSize: 9,
+                                      fontFamily: 'Manrope',
+                                      fontWeight: FontWeight.w700,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
