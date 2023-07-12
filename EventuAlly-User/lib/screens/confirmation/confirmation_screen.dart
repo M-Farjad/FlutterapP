@@ -72,12 +72,15 @@ class ConfirmationScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: Get.height * .03),
+          const Spacer(),
           Button(
-              label: 'Confirm',
-              onPressed: () {
-                // if(_formKey.currentState.validate)
-              })
+            label: 'Confirm',
+            onPressed: () {
+              // if(_formKey.currentState.validate)
+              Get.toNamed('/checkout');
+            },
+          ),
+          SizedBox(height: Get.height * .01),
         ],
       )),
     );

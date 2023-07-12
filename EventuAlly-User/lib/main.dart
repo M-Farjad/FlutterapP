@@ -7,7 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/login.dart';
 import '../screens/home_page/home_page.dart';
 import 'screens/cart/cart_screen.dart';
+import 'screens/checkout/checkout_screen.dart';
 import 'screens/confirmation/confirmation_screen.dart';
+import 'screens/order_placed/order_placed_screen.dart';
 import 'screens/orders/orders_screen.dart';
 import 'screens/order_status/order_status_screen.dart';
 import '../screens/onboard.dart';
@@ -120,9 +122,11 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/orderstatus', page: () => OrderStatusScreen()),
         GetPage(name: '/product', page: () => const ProductScreen()),
         GetPage(name: '/mycart', page: () => CartScreen()),
+        GetPage(name: '/order_placed', page: () => const OrderPlacedScreen()),
         GetPage(
             name: '/order_confirmation',
             page: () => const ConfirmationScreen()),
+        GetPage(name: '/checkout', page: () => const CheckOutScreen()),
       ],
       initialRoute: isViewed != 0 ? '/onboard' : '/login',
       // routes: {
