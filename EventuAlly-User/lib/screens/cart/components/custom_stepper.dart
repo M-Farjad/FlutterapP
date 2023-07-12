@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/constant.dart';
-import '../../orders/orders_screen.dart';
 
 class CustomStepper extends StatelessWidget {
   // final int stepNumber;
@@ -15,7 +15,7 @@ class CustomStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: mq.width * .08),
+      padding: EdgeInsets.symmetric(horizontal: Get.width * .08),
       child: Column(
         children: [
           Row(
@@ -68,7 +68,7 @@ class CustomStepper extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: mq.width * .15,
+                width: Get.width * .15,
                 child: Text(
                   stepTitle[0][0],
                   style: TextStyle(
@@ -82,7 +82,7 @@ class CustomStepper extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: mq.width * .15,
+                width: Get.width * .15,
                 child: Text(
                   stepTitle[1][0],
                   style: TextStyle(
@@ -96,7 +96,7 @@ class CustomStepper extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: mq.width * .15,
+                width: Get.width * .15,
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(

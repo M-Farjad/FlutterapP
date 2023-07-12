@@ -35,7 +35,7 @@ TextStyle k8TextStyle = const TextStyle(
 );
 
 List<BoxShadow>? shadowsBelow = [
-  BoxShadow(
+  const BoxShadow(
     color: Color(0x0C1C252C),
     blurRadius: 8,
     offset: Offset(0, 4),
@@ -43,7 +43,7 @@ List<BoxShadow>? shadowsBelow = [
   )
 ];
 List<BoxShadow>? shadowsAbove = [
-  BoxShadow(
+  const BoxShadow(
     color: Color(0x26000000),
     blurRadius: 15,
     offset: Offset(0, 4),

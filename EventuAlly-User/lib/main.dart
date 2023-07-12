@@ -112,15 +112,17 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/onboard', page: () => const Onboard()),
         GetPage(name: '/login', page: () => const Login()),
-        GetPage(name: '/signup', page: () => const signup()),
+        GetPage(name: '/signup', page: () => const Signup()),
         GetPage(name: '/otpverification', page: () => const OtpVerification()),
         GetPage(name: '/forgetpassword', page: () => const ForgetPassword()),
         GetPage(name: '/homepage', page: () => const HomePage()),
         GetPage(name: '/order', page: () => OrdersScreen()),
         GetPage(name: '/orderstatus', page: () => OrderStatusScreen()),
-        GetPage(name: '/product', page: () => ProductScreen()),
+        GetPage(name: '/product', page: () => const ProductScreen()),
         GetPage(name: '/mycart', page: () => CartScreen()),
-        GetPage(name: '/order_confirmation', page: () => ConfirmationScreen()),
+        GetPage(
+            name: '/order_confirmation',
+            page: () => const ConfirmationScreen()),
       ],
       initialRoute: isViewed != 0 ? '/onboard' : '/login',
       // routes: {

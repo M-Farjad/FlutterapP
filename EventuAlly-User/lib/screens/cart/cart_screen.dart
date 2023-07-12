@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import '../../widget/toggle_button.dart';
 import '../home_page/home_page.dart';
 import '../orders/components/order_card.dart';
-import '../orders/orders_screen.dart';
 import 'components/custom_stepper.dart';
 
+// ignore: must_be_immutable
 class CartScreen extends StatelessWidget {
   CartScreen({super.key});
   int currentStep = 0;
@@ -17,7 +17,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TextAppBar(title: 'My Cart'),
-      bottomNavigationBar: CustomBottomNabBar(),
+      bottomNavigationBar: const CustomBottomNabBar(),
       body: Column(
         children: [
           const CustomStepper(
@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
               ['Checkout', false]
             ],
           ),
-          SizedBox(height: mq.height * .01),
+          SizedBox(height: Get.height * .01),
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) => OrderCard(
@@ -39,7 +39,7 @@ class CartScreen extends StatelessWidget {
           // Spacer(),
           Container(
             // width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: mq.width * .04),
+            padding: EdgeInsets.symmetric(horizontal: Get.width * .04),
             height: 70,
             decoration: ShapeDecoration(
               color: Colors.white,
@@ -50,10 +50,10 @@ class CartScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ToggleButton(),
+                const ToggleButton(),
                 SizedBox(
-                  width: mq.width * .21,
-                  child: Text(
+                  width: Get.width * .21,
+                  child: const Text(
                     'All Items',
                     textAlign: TextAlign.right,
                     style: TextStyle(
@@ -65,7 +65,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Expanded(
                   child: Button(
                     label: 'Proceed',

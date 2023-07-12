@@ -9,12 +9,11 @@ import '../../widget/product_image_view.dart';
 import '../../widget/product_title_text.dart';
 import '../../widget/text_appbar.dart';
 import '../../constants/constant.dart';
-import '../orders/orders_screen.dart';
-import 'components/image_counter_row.dart';
 import 'components/order_date.dart';
 import 'components/order_duration.dart';
 import 'components/order_location.dart';
 
+// ignore: must_be_immutable
 class OrderStatusScreen extends StatelessWidget {
   OrderStatusScreen({super.key});
   final List<String> _list = [
@@ -25,24 +24,23 @@ class OrderStatusScreen extends StatelessWidget {
   OrderPicController orderPicController = Get.put(OrderPicController());
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const TextAppBar(title: 'Order Details'),
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mq.width * .08),
+        padding: EdgeInsets.symmetric(horizontal: Get.width * .08),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Text('Order Status', style: kBlackTextStyle),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: mq.width * .02, vertical: mq.height * .02),
+                    horizontal: Get.width * .02, vertical: Get.height * .02),
                 child: StepProgressIndicator(
                   totalSteps: 3,
                   currentStep: 1,
-                  size: mq.height * .08,
-                  padding: mq.width * .006,
+                  size: Get.height * .08,
+                  padding: Get.width * .006,
                   selectedColor: Color(constant.red),
                   unselectedColor: Colors.grey,
                   customStep: makeProgressSteps,
@@ -51,9 +49,9 @@ class OrderStatusScreen extends StatelessWidget {
               ProductImageView(orderPicController: orderPicController),
               const ProductTitleText(),
               Text('Order Number: 098765', style: kRedTextStyle),
-              SizedBox(height: mq.height * .015),
+              SizedBox(height: Get.height * .015),
               const ProductCategories(),
-              SizedBox(height: mq.height * .015),
+              SizedBox(height: Get.height * .015),
               const PriceAndPeopleText(),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +78,7 @@ class OrderStatusScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: mq.height * .015),
+              SizedBox(height: Get.height * .015),
               const OrderDate(),
               const OrderLocation(),
               const OrderDuration()
@@ -102,9 +100,9 @@ class OrderStatusScreen extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
           ),
         ),
-        SizedBox(height: mq.height * .01),
+        SizedBox(height: Get.height * .01),
         SizedBox(
-          width: mq.width * .15,
+          width: Get.width * .15,
           child: Text(
             _list[index],
             maxLines: 2,

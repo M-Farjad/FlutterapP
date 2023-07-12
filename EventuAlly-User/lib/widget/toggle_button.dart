@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../constants/constant.dart';
 import '../controllers/cart_controller.dart';
-import '../screens/orders/orders_screen.dart';
 
 class ToggleButton extends StatelessWidget {
   const ToggleButton({super.key});
@@ -13,7 +12,7 @@ class ToggleButton extends StatelessWidget {
     final controller = Get.put(ToggleButtonController());
 
     return SizedBox(
-      width: mq.width * .08,
+      width: Get.width * .08,
       child: Obx(
         () => GestureDetector(
           onTap: controller.toggle,

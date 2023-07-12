@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/product_controller.dart';
-import '../../orders/orders_screen.dart';
+
 import 'incr_decr_btn.dart';
 
 class ChangePeopleCountRow extends StatelessWidget {
@@ -16,7 +16,7 @@ class ChangePeopleCountRow extends StatelessWidget {
       child: Row(
         children: [
           IncrDecrPeopleBtn(icon: Icons.remove),
-          SizedBox(width: mq.width * .01),
+          SizedBox(width: Get.width * .01),
           Obx(
             () => Text(
               controller.peopleCount.toString(),
@@ -28,7 +28,7 @@ class ChangePeopleCountRow extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: mq.width * .01),
+          SizedBox(width: Get.width * .01),
           IncrDecrPeopleBtn(icon: Icons.add),
         ],
       ),

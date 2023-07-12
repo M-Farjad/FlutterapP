@@ -14,10 +14,16 @@ class Button extends StatefulWidget {
 class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return ElevatedButton(
       onPressed: widget.onPressed,
+      style: ElevatedButton.styleFrom(
+        elevation: 10.0,
+        shadowColor: const Color(0xFFCB585A).withOpacity(0.4),
+        backgroundColor: const Color(0xFFCB585A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
       /*onPressed: () {
         String? currentRoute = ModalRoute.of(context)?.settings.name;
 
@@ -43,17 +49,9 @@ class _ButtonState extends State<Button> {
           style: TextStyle(
             fontFamily: constant.font,
             fontWeight: FontWeight.w600,
-            fontSize: width * 0.04,
+            fontSize: Get.width * 0.04,
             color: Colors.white,
           )),
-      style: ElevatedButton.styleFrom(
-        elevation: 10.0,
-        shadowColor: Color(0xFFCB585A).withOpacity(0.4),
-        backgroundColor: Color(0xFFCB585A),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
     );
   }
 }

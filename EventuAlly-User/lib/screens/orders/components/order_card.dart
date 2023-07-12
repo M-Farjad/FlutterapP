@@ -1,11 +1,10 @@
-import 'package:eventually_user/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/cart_controller.dart';
 import '../../../widget/toggle_button.dart';
-import '../orders_screen.dart';
 
+// ignore: must_be_immutable
 class OrderCard extends StatelessWidget {
   OrderCard({super.key, this.show});
   final controller = Get.put(ToggleButtonController());
@@ -14,7 +13,7 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: mq.width * .03, vertical: mq.height * .015),
+          horizontal: Get.width * .03, vertical: Get.height * .015),
       child: Column(
         children: [
           Card(
@@ -25,7 +24,7 @@ class OrderCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: mq.width * .03, vertical: mq.height * .015),
+                    horizontal: Get.width * .03, vertical: Get.height * .015),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,7 +42,7 @@ class OrderCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: mq.height * .01),
+                    SizedBox(height: Get.height * .01),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -57,7 +56,7 @@ class OrderCard extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(width: mq.width * .03),
+                        SizedBox(width: Get.width * .03),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,8 +92,8 @@ class OrderCard extends StatelessWidget {
                               ),
                               SizedBox(
                                   height: show != null
-                                      ? mq.height * .02
-                                      : mq.height * .04),
+                                      ? Get.height * .02
+                                      : Get.height * .04),
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

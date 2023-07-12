@@ -3,7 +3,6 @@ import 'package:eventually_user/screens/home_page/home_page.dart';
 import 'package:eventually_user/widget/text_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -13,7 +12,7 @@ import '../../widget/price_people_text.dart';
 import '../../widget/product_categories.dart';
 import '../../widget/product_image_view.dart';
 import '../../widget/product_title_text.dart';
-import '../orders/orders_screen.dart';
+
 import 'components/change_people_count_row.dart';
 import 'components/duration_button.dart';
 
@@ -45,22 +44,21 @@ class _ProductScreenState extends State<ProductScreen> {
   );
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: CustomBottomNabBar(),
+      bottomNavigationBar: const CustomBottomNabBar(),
       appBar: const TextAppBar(title: ''),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: mq.width * .07),
+          padding: EdgeInsets.symmetric(horizontal: Get.width * .07),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 ProductImageView(orderPicController: orderPicController),
-                SizedBox(height: mq.height * .02),
+                SizedBox(height: Get.height * .02),
                 const ProductTitleText(),
-                SizedBox(height: mq.height * .02),
+                SizedBox(height: Get.height * .02),
                 const ProductCategories(),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 const PriceAndPeopleText(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,7 +75,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ChangePeopleCountRow()
                   ],
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 const Row(
                   children: [
                     Text(
@@ -166,7 +164,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(right: mq.width * .04),
+                        padding: EdgeInsets.only(right: Get.width * .04),
                         child: ElevatedButton(
                           onPressed: () {
                             _showDatePicker(context, DatePickerMode.day);
@@ -204,7 +202,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(left: mq.width * .04),
+                        padding: EdgeInsets.only(left: Get.width * .04),
                         child: ElevatedButton(
                           onPressed: () {
                             _showDatePicker(context, DatePickerMode.year);
@@ -225,7 +223,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 const Row(
                   children: [
                     Text(
@@ -241,7 +239,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     Spacer()
                   ],
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 TextFormField(
                   style: const TextStyle(
                     color: Color(0x7F555454),
@@ -275,7 +273,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 const Row(
                   children: [
                     Text(
@@ -291,21 +289,21 @@ class _ProductScreenState extends State<ProductScreen> {
                     Spacer()
                   ],
                 ),
-                SizedBox(height: mq.height * .01),
+                SizedBox(height: Get.height * .01),
                 Row(
                   children: [
                     DurationButton(
                       imagePath: 'assets/images/flag.svg',
                       buttonText: 'Start Time',
                     ),
-                    SizedBox(width: mq.width * .03),
+                    SizedBox(width: Get.width * .03),
                     DurationButton(
                       imagePath: 'assets/images/flag-alt.svg',
                       buttonText: 'End Time',
                     ),
                   ],
                 ),
-                SizedBox(height: mq.height * .005),
+                SizedBox(height: Get.height * .005),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -317,7 +315,8 @@ class _ProductScreenState extends State<ProductScreen> {
                       },
                     )),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: mq.width * .02),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * .02),
                       child: const Text(
                         'Or',
                         style: TextStyle(
@@ -409,7 +408,7 @@ class _ProductScreenState extends State<ProductScreen> {
     final pickedMonth = await showModalBottomSheet<int>(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: MediaQuery.of(context).copyWith().size.height / 3,
           child: CupertinoPicker(
             itemExtent: 50,

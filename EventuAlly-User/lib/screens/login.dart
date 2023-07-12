@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../constants/constant.dart';
 import '../widget/logo.dart';
 import '../widget/button.dart';
-import '../widget/googleButton.dart';
+import '../widget/google_button.dart';
 import '../widget/heading.dart';
 import '../widget/subheading.dart';
 import '../widget/textfield.dart';
@@ -40,21 +40,21 @@ class _LoginState extends State<Login> {
               Container(
                 padding: const EdgeInsets.all(0.0),
                 margin: EdgeInsets.fromLTRB(0.0, height * 0.04, 0.0, 0.0),
-                child: logo(width: width * 0.9, height: height * 0.15),
+                child: Logo(width: width * 0.9, height: height * 0.15),
               ),
-              heading(
+              Heading(
                 title: 'Welcome Back',
                 heightFromTop: height * 0.008,
                 fontSize: width * 0.11,
               ),
-              subHeading(
+              SubHeading(
                 title: "Welcome back, you've been missed.",
                 fontSize: width * 0.04,
               ),
               Container(
                 height: height * 0.07,
                 margin: EdgeInsets.fromLTRB(0.0, height * 0.03, 0.0, 0.0),
-                child: textFormField(
+                child: CustomTextFormField(
                   title: 'Email',
                   // controller: Get.put,
                 ),
@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
                       },
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     // margin: EdgeInsets.fromLTRB(0.0, 0.0, 100.0, 0.0),
                     child: Text(
                       'Remember me',

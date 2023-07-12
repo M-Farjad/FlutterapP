@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../controllers/order_pic_controller.dart';
 import '../screens/order_status/components/image_counter_row.dart';
-import '../screens/orders/orders_screen.dart';
 
 class ProductImageView extends StatelessWidget {
   const ProductImageView({
@@ -17,7 +17,7 @@ class ProductImageView extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: mq.height * 0.22, // Set a specific height for the PageView
+          height: Get.height * 0.22, // Set a specific height for the PageView
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -31,7 +31,7 @@ class ProductImageView extends StatelessWidget {
             },
             itemBuilder: (context, index) => Container(
               width: double.infinity,
-              height: mq.height * .3,
+              height: Get.height * .3,
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),

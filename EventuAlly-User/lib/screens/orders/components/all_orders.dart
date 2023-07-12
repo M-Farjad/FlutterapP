@@ -26,8 +26,8 @@ class AllOrders extends StatelessWidget {
               // Active Order Portion
               if (index == aStartingIndex) {
                 return Column(children: [
-                  SizedBox(height: 10),
-                  OrderTypeTextContainer(
+                  const SizedBox(height: 10),
+                  const OrderTypeTextContainer(
                       text: 'Active orders', color: Colors.green),
                   OrderCard()
                 ]);
@@ -38,8 +38,8 @@ class AllOrders extends StatelessWidget {
               // Pending Order Portion
               if (index == pStartingIndex) {
                 return Column(children: [
-                  SizedBox(height: 10),
-                  OrderTypeTextContainer(
+                  const SizedBox(height: 10),
+                  const OrderTypeTextContainer(
                       text: 'Previous orders', color: Color(0xFF555454)),
                   OrderCard()
                 ]);
@@ -50,8 +50,8 @@ class AllOrders extends StatelessWidget {
               // Cancel Order Portion
               if (index == cStartingIndex) {
                 return Column(children: [
-                  SizedBox(height: 10),
-                  OrderTypeTextContainer(
+                  const SizedBox(height: 10),
+                  const OrderTypeTextContainer(
                       color: Color(0xFFDC0003), text: 'Cancelled orders'),
                   OrderCard()
                 ]);
