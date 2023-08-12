@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_deal/values/custom_colors.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/obsecure_controller.dart';
 import '../values/strings.dart';
 import '../values/styles.dart';
 
@@ -11,18 +11,21 @@ class PasswordField extends StatelessWidget {
   PasswordField({
     Key? key,
     this.onTap,
+    this.codeController,
   }) : super(key: key);
   VoidCallback? onTap;
+  final TextEditingController? codeController; //Pass the respective controller
+  //!make sure to add
+  final ObsecureController hidecontroller = Get.put(ObsecureController());
 
-  LoginController controller = Get.find<LoginController>();
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => TextFormField(
         onTap: onTap,
-        controller: controller.passwordController,
+        controller: codeController,
         enableInteractiveSelection: true,
-        obscureText: controller.obscureText.value,
+        obscureText: hidecontroller.obscureText.value,
         validator: (value) {
           if (value!.length < 8) {
             return 'Password must be greater than 8 digits';
@@ -32,11 +35,11 @@ class PasswordField extends StatelessWidget {
         decoration: InputDecoration(
           suffixIcon: GestureDetector(
             onTap: () {
-              controller.toggleObscureText();
+              hidecontroller.toggleObscureText();
             },
             child: Obx(
               () => Icon(
-                controller.obscureText.value
+                hidecontroller.obscureText.value
                     ? Icons.visibility
                     : Icons.visibility_off_rounded,
                 color: Colors.grey,

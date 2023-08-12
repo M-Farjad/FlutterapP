@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:real_deal/values/values.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../values/values.dart';
+import 'bindings.dart';
 import 'screens/routes.dart';
 import 'values/custom_theme.dart';
 import 'values/strings.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: CustomTheme.theme,
       getPages: Routes.routeList,
       initialRoute: NamedRoutes.splash,
+      initialBinding: InitialBinding.initialBinding,
     );
   }
 }

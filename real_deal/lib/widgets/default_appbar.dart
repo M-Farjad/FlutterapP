@@ -4,8 +4,7 @@ import '../values/custom_colors.dart';
 
 AppBar customAppBar({Widget? title, bool leading = true}) {
   return AppBar(
-    backgroundColor:
-        leading == true ? CustomColors.primaryColor : Colors.transparent,
+    backgroundColor: leading == true ? CustomColors.primaryColor : null,
     title: title,
     automaticallyImplyLeading: leading,
     centerTitle: !leading,

@@ -23,14 +23,32 @@ class WhatsappAlertDialog extends StatelessWidget {
 
   final SharedPreferences _prefs;
   RxBool show;
-  final Uri whatsappCommunity = Uri.parse('https://wa.me/1XXXXXXXXXX');
-  Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  final Uri whatsappCommunity =
+      Uri.parse('https://chat.whatsapp.com/HvaBQCHPWPPISgm9lhyphn');
+  // Future<void> _launchURL() async {
+  //   // if (await canLaunch(url)) {
+  //   //   await launch(url);
+  //   // } else {
+  //   //   throw 'Could not launch $url';
+  //   // }
+  //   await launchUrl(whatsappCommunity);
+  // }
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
     }
   }
+  // Future<void> _launchURL(String url) async {
+  //   // if (await canLaunch(url)) {
+  //   //   await launch(url);
+  //   // } else {
+  //   //   throw 'Could not launch $url';
+  //   // }
+  //   launchUrl(whatsappCommunity);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +109,16 @@ class WhatsappAlertDialog extends StatelessWidget {
                       fontWeight: FontWeight.w600),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Get.back();
-                    _prefs.setBool('showModal', false);
-                    show.value = false;
-                    _launchURL(
-                      'https://chat.whatsapp.com/BW9yhWkmZuA58M4BncrTNy',
-                    );
+                  onTap: () async {
+                    await _launchInBrowser(whatsappCommunity
+                            // 'https://chat.whatsapp.com/HvaBQCHPWPPISgm9lhyphn',
+                            // 'https://chat.whatsapp.com/BW9yhWkmZuA58M4BncrTNy',
+                            )
+                        .then((value) {
+                      Get.back();
+                      _prefs.setBool('showModal', false);
+                      show.value = false;
+                    });
                   },
                   child: Container(
                     width: Get.width * .55,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
 import '../values/assets.dart';
 import '../values/custom_colors.dart';
-import '../controllers/login_controller.dart';
 import '../values/strings.dart';
 import '../values/styles.dart';
-import '../screens/forget_password/widgets/send_otp_btn.dart';
+import '../screens/login auth/widgets/send_otp_btn.dart';
 
 // ignore: must_be_immutable
 class PhoneNumberField extends StatelessWidget {
@@ -16,10 +14,12 @@ class PhoneNumberField extends StatelessWidget {
     super.key,
     this.screenName,
     this.onTap,
+    this.txtcontroller,
+    this.controller,
     // this.focusNode,
   });
-
-  final LoginController controller = Get.find<LoginController>();
+  final controller;
+  final TextEditingController? txtcontroller;
   String? screenName;
   VoidCallback? onTap;
 
@@ -43,7 +43,11 @@ class PhoneNumberField extends StatelessWidget {
             }
             return null;
           },
-          controller: controller.phoneNumberController,
+          controller: txtcontroller,
+          initialValue: txtcontroller == null
+              // ? controller?.phoneNumber?.value.toString()
+              ? controller?.phoneNumber?.value
+              : null,
           decoration: InputDecoration(
             hintStyle: TextStyle(
               color: CustomColors.grey,
@@ -65,7 +69,8 @@ class PhoneNumberField extends StatelessWidget {
                 ? Positioned(
                     right: 15,
                     top: 17,
-                    child: SvgPicture.asset(Assets.verifiedCheck))
+                    child: SvgPicture.asset(Assets.verifiedCheck),
+                  )
                 : const SizedBox(),
       ],
     );

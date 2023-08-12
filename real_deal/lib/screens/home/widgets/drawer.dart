@@ -5,14 +5,15 @@ import 'package:real_deal/values/custom_colors.dart';
 import 'package:real_deal/values/styles.dart';
 import 'package:real_deal/values/values.dart';
 
+import '../../../controllers/main_controller.dart';
 import '../../../values/assets.dart';
 import '../../../values/shadows.dart';
 import '../../../values/spacing.dart';
 import '../../../values/strings.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
-
+  CustomDrawer({super.key});
+  final MainScreenController controller = Get.find<MainScreenController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,7 +54,8 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 leading: SvgPicture.asset(Assets.distributor),
                 onTap: () {
-                  // Handle item 2 tap
+                  //move to cart for refer a friend
+                  controller.updateSelectedIndex(2);
                 },
               ),
               Spacing.vertical(.01),

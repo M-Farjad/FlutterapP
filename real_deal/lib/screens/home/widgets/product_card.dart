@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../values/assets.dart';
+import '../../../controllers/cart_controller.dart';
+import '../../../models/product_model.dart';
 import '../../../values/custom_colors.dart';
 import '../../../values/shadows.dart';
-import '../../../values/strings.dart';
 import '../../../values/styles.dart';
 import 'add_to_cart_btn.dart';
 import 'iterm_like_btn.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
+class CatalogProductCard extends StatelessWidget {
+  CatalogProductCard({
     super.key,
+    required this.index,
   });
+  final int index;
+  final CartController controller = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class ProductCard extends StatelessWidget {
         // width: 157,
         // height: 210,
         width: 157,
-        height: 251,
+        // height: 251,
         decoration: ShapeDecoration(
           color: CustomColors.white,
           shape: RoundedRectangleBorder(
@@ -34,9 +38,15 @@ class ProductCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  Assets.carrots,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  child: Image.asset(
+                    ProductModel.products[index].imagePath,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -46,7 +56,7 @@ class ProductCard extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          Strings.freshCarrot,
+                          ProductModel.products[index].name,
                           style: Styles.regularInter14(
                             CustomColors.normalTextColor,
                             fontWeight: FontWeight.w600,
@@ -56,7 +66,8 @@ class ProductCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            Strings.newPrice,
+                            ProductModel.products[index].newPrice.toString(),
+                            overflow: TextOverflow.ellipsis,
                             style: Styles.regularInter13(
                               CustomColors.primaryColor,
                               fontWeight: FontWeight.w700,
@@ -65,7 +76,7 @@ class ProductCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 5),
                           Text(
-                            Strings.perKG,
+                            ProductModel.products[index].sellMethod,
                             style: Styles.regularInter10(
                               CustomColors.lightTextColor,
                               letterSpacing: 0.07,
@@ -76,7 +87,7 @@ class ProductCard extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          Strings.oldPrice,
+                          ProductModel.products[index].oldPrice.toString(),
                           style: Styles.regularInter11(
                             CustomColors.grey,
                             fontWeight: FontWeight.w500,
@@ -91,7 +102,11 @@ class ProductCard extends StatelessWidget {
               ],
             ),
             const ItemLikeButton(),
-            const AddToCartButton()
+            AddToCartButton(
+              onTap: () => controller.addProducts(
+                ProductModel.products[index],
+              ),
+            ),
           ],
         ),
       ),

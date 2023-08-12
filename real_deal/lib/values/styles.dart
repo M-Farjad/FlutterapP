@@ -18,6 +18,7 @@ class Styles {
         decorationColor: lineThrough == true ? color : null,
         fontWeight: fontWeight,
       );
+
   static TextStyle regularMonteAlt28(Color color,
           {FontWeight fontWeight = FontWeight.normal}) =>
       GoogleFonts.montserratAlternates(

@@ -11,11 +11,11 @@ class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
     super.key,
     required this.controller,
-    required PageController pageController,
-  }) : _pageController = pageController;
-
+    // required PageController pageController,
+  }) // : _pageController = pageController;
+  ;
   final MainScreenController controller;
-  final PageController _pageController;
+  // final PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,6 @@ class BottomNavBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.updateSelectedIndex(0);
-              _pageController.jumpToPage(0);
             },
             child: InkResponse(
               child: Obx(
@@ -52,7 +51,6 @@ class BottomNavBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.updateSelectedIndex(1);
-              _pageController.jumpToPage(1);
             },
             child: InkResponse(
               child: Obx(
@@ -67,7 +65,6 @@ class BottomNavBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.updateSelectedIndex(2);
-              _pageController.jumpToPage(2);
             },
             child: InkResponse(
               child: Obx(
@@ -82,7 +79,6 @@ class BottomNavBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.updateSelectedIndex(3);
-              _pageController.jumpToPage(3);
             },
             child: InkResponse(
               child: Obx(
@@ -97,7 +93,6 @@ class BottomNavBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               controller.updateSelectedIndex(4);
-              _pageController.jumpToPage(4);
             },
             child: InkResponse(
               child: Obx(

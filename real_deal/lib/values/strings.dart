@@ -71,13 +71,16 @@ class Strings {
   static String popularProducts = 'Popular Products';
   static String seeMore = 'See more';
   static String mostSellingProducts = 'Most Sealing Products';
-  static String freshCarrot = 'Fresh Carrot';
+  static String carrots = 'Fresh Carrot';
+  static String redChili = 'Fresh Red Chili';
+  static String onions = 'Fresh Onion';
+  static String potatoes = 'Fresh Potato';
   static String perKG = '/ kg';
+  static String perPack = '/ 1 pack';
   static String oldPrice = 'Rs 210';
   static String newPrice = 'Rs 190';
   static String cart = 'Cart';
   static String checkout = 'Checkout';
-  static String freshRedChili = 'Fresh Red Chili';
   static String freeDeliveryText =
       'On total shopping of 5000 your delivery charges will be free.';
   static String addMoreItemsToCart = 'Add more items to cart';

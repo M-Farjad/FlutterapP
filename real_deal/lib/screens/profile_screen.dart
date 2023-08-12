@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:real_deal/widgets/password_field.dart';
-import 'package:real_deal/widgets/phone_number_field.dart';
-import 'package:real_deal/screens/register/registration/name_field.dart';
+import 'package:real_deal/widgets/default_appbar.dart';
+
+import '../controllers/profile_controller.dart';
+import '../widgets/password_field.dart';
+import '../widgets/phone_number_field.dart';
+import 'login auth/widgets/registration_fields.dart';
 import '../values/custom_colors.dart';
 import '../values/shadows.dart';
 import '../values/spacing.dart';
@@ -10,25 +13,24 @@ import '../values/strings.dart';
 import '../values/styles.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
+  ProfileScreen({super.key});
+  final ProfileController controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: customAppBar(
         title: Text(
           Strings.myProfile,
           textAlign: TextAlign.center,
           style: Styles.regularInter24(CustomColors.black),
         ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
+        leading: false,
       ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * .08),
           child: SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +43,10 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertical(.01),
-                NameField(isFirstName: true),
+                NameField(
+                  isFirstName: true,
+                  register: false,
+                ),
                 Spacing.vertical(.01),
                 Text(
                   Strings.lastName,
@@ -51,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertical(.01),
-                NameField(isFirstName: false),
+                NameField(isFirstName: false, register: false),
                 Spacing.vertical(.02),
                 SizedBox(
                   width: double.infinity,
@@ -64,7 +69,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Spacing.vertical( .01),
                 Text(
                   Strings.phone,
                   style: Styles.regularInter14(
@@ -72,7 +76,11 @@ class ProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                PhoneNumberField(screenName: Strings.profile),
+                PhoneNumberField(
+                  screenName: Strings.profile,
+                  controller: controller,
+                  // txtcontroller: controller.phoneNumberController,
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: Text(
@@ -84,7 +92,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Spacing.vertical( .01),
                 Text(
                   Strings.address,
                   style: Styles.regularInter14(
@@ -92,8 +99,7 @@ class ProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                // Spacing.vertical( .01),
-                AddressField(),
+                AddressField(register: false),
                 Spacing.vertical(.01),
                 SizedBox(
                   width: double.infinity,
@@ -106,7 +112,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Spacing.vertical( .01),
                 Text(
                   Strings.currentPassword,
                   style: Styles.regularInter14(
@@ -115,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertical(.01),
-                PasswordField(),
+                PasswordField(codeController: controller.currentPassController),
                 Spacing.vertical(.01),
                 Text(
                   Strings.newPassword,
@@ -125,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertical(.01),
-                PasswordField(),
+                PasswordField(codeController: controller.newPasswordcontroller),
                 Spacing.vertical(.02),
                 Center(
                   child: Container(

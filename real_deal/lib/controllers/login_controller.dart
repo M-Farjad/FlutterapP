@@ -1,85 +1,77 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:real_deal/values/values.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../utils/api_endpoints.dart';
+import '../values/values.dart';
 
 class LoginController extends GetxController {
+  // final RxBool obscureText = true.obs;
+  // void toggleObscureText() {
+  //   obscureText.toggle();
+  // }
+  RxInt otp = 000000.obs;
+  RxString phoneNumber = ''.obs,
+      password = ''.obs,
+      fName = 'ali'.obs,
+      lName = 'ahmad'.obs,
+      address = '100-Lahore, Punjab, Pakistan'.obs,
+      city = 'Lahore'.obs,
+      pCode = '54000'.obs;
+
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController verificationController = TextEditingController();
-  final TextEditingController fNameController = TextEditingController();
-  final TextEditingController lNameController = TextEditingController();
-  final TextEditingController addrsController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
-  final TextEditingController pCodeController = TextEditingController();
-
-  final RxBool obscureText = true.obs;
-  RxInt phoneNumber = 0.obs;
-  RxInt otp = 000000.obs;
-  RxString password = ''.obs,
-      fName = ''.obs,
-      lName = ''.obs,
-      address = ''.obs,
-      city = ''.obs,
-      pCode = ''.obs;
-
-  void toggleObscureText() {
-    obscureText.toggle();
-  }
 
   void handleLogin(GlobalKey<FormState> formKey) {
     if (formKey.currentState!.validate()) {
-      // Validation passed, perform login logic here
-      phoneNumber.value = int.parse(phoneNumberController.text);
+      phoneNumber.value = phoneNumberController.text;
       password.value = passwordController.text;
 
-      // Example log output
       log('Phone Number: ${phoneNumber.value}');
       log('Password: ${password.value}');
+
       Get.toNamed(NamedRoutes.main);
     }
   }
 
-  void handleLocation(GlobalKey<FormState> formKey) {
-    if (formKey.currentState!.validate()) {
-      address.value = addrsController.text;
-      city.value = cityController.text;
-      pCode.value = pCodeController.text;
-      log('password: ${password.value}');
-      log('First: ${fName.value}');
-      log('Last: ${lName.value}');
-      Get.toNamed(NamedRoutes.main);
-    }
-  }
+  Future<void> loginUser() async {
+    var headers = {'Content-Type': 'application/json'};
+    try {
+      var url = Uri.parse(
+          ApiEndPoints.baseUrl + ApiEndPoints.authEndPoints.loginEmail);
+      Map body = {
+        'phone': phoneNumberController.text,
+        'password': passwordController.text,
+      };
+      http.Response response =
+          await http.post(url, body: jsonEncode(body), headers: headers);
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        if (json['code'] == 0) {
+          var token = json['data']['Token'];
+          await Get.find<SharedPreferences>().setString('token', token);
 
-  void handleRegistration(GlobalKey<FormState> formKey) {
-    if (formKey.currentState!.validate()) {
-      password.value = passwordController.text;
-      fName.value = fNameController.text;
-      lName.value = lNameController.text;
-      log('password: ${password.value}');
-      log('First: ${fName.value}');
-      log('Last: ${lName.value}');
-      Get.toNamed(NamedRoutes.location);
-    }
-  }
-
-  void handleVerification(GlobalKey<FormState> formKey) {
-    if (formKey.currentState!.validate()) {
-      otp.value = int.parse(verificationController.text);
-      log('otp Number: ${otp.value}');
-      Get.toNamed(NamedRoutes.registration);
-    }
-  }
-
-  void handleRegister(GlobalKey<FormState> formKey) {
-    if (formKey.currentState!.validate()) {
-      // Validation passed, perform register logic here
-      phoneNumber.value = int.parse(phoneNumberController.text);
-      // Example log output
-      log('Phone Number: ${phoneNumber.value}');
-      Get.toNamed(NamedRoutes.verification);
+          phoneNumberController.clear();
+          passwordController.clear();
+          Get.offAllNamed(NamedRoutes.main);
+        } else if (json['code'] == 1) {
+          throw jsonDecode(response.body)['message'] ?? 'Unknown Error Occured';
+        } else {
+          throw jsonDecode(response.body)['Message'] ?? 'Unknown Error Occured';
+        }
+      }
+    } catch (e) {
+      Get.back();
+      showDialog(
+        context: Get.context!,
+        builder: (context) {
+          return AlertDialog(title: const Text("Error"), content: Text("$e"));
+        },
+      );
     }
   }
 

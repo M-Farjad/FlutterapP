@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../controllers/login_controller.dart';
 import '../../values/category_list.dart';
 import '../../values/custom_colors.dart';
 import '../../widgets/background_shape.dart';
@@ -14,12 +13,12 @@ import '../../values/strings.dart';
 import '../../values/styles.dart';
 import '../../widgets/real_deal.dart';
 import '../../widgets/search_field.dart';
+import '../category/widgets/catalog_products.dart';
 import 'widgets/category.dart';
 import 'widgets/deal_indicators.dart';
 import 'widgets/deal_offers.dart';
 import 'widgets/drawer.dart';
 import 'widgets/location_row.dart';
-import 'widgets/product_card.dart';
 import 'widgets/see_more_row.dart';
 import 'widgets/whatsapp_dialog.dart';
 
@@ -31,7 +30,7 @@ class HomeScreen extends StatelessWidget {
   final ImageController imageController = Get.put(ImageController());
   final PageController _pageController =
       PageController(viewportFraction: .85); // To control the page view
-  final LoginController controller = Get.find<LoginController>();
+  // final LoginController controller = Get.find<LoginController>();
 
   void _initSharedPreferences() {
     // showModal.value = true;
@@ -51,7 +50,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _initSharedPreferences();
     return Scaffold(
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       // appBar: customAppBar(),
       drawerScrimColor: Colors.transparent,
       body: SingleChildScrollView(
@@ -128,44 +127,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Divider(color: CustomColors.grey),
                   SeeMoreRow(title: Strings.specialDeal),
-                  SizedBox(
-                    height: 220,
-                    child: ListView.builder(
-                      // shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: category.length,
-                      itemBuilder: (_, int index) {
-                        return const ProductCard();
-                      },
-                    ),
-                  ),
+                  const CatalogProductsList(),
                   SeeMoreRow(title: Strings.popularProducts),
-                  SizedBox(
-                    height: 220,
-                    child: ListView.builder(
-                      // shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: category.length,
-                      itemBuilder: (_, int index) {
-                        return const ProductCard();
-                      },
-                    ),
-                  ),
+                  const CatalogProductsList(),
                   SeeMoreRow(title: Strings.mostSellingProducts),
-                  SizedBox(
-                    height: 220,
-                    child: ListView.builder(
-                      // shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: category.length,
-                      itemBuilder: (_, int index) {
-                        return const ProductCard();
-                      },
-                    ),
-                  ),
+                  const CatalogProductsList()
                 ],
               ),
             ),

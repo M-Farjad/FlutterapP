@@ -39,7 +39,7 @@ class HomeBackgroundShape extends StatelessWidget {
       right: -Get.width * .7,
       left: -Get.width * .7,
       top: -Get.height * .2,
-      bottom: 1000,
+      bottom: 1030,
       child: Container(
         decoration: ShapeDecoration(
           color: CustomColors.primaryColor,

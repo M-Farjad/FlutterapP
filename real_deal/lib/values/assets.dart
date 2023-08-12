@@ -40,6 +40,8 @@ class Assets {
   static String offer = 'assets/images/offer.png';
   static String carrots = 'assets/images/carrots.png';
   static String redChili = 'assets/images/red_chili.png';
+  static String onions = 'assets/images/onions.png';
+  static String potatoes = 'assets/images/potatoes.png';
   static String metro = 'assets/images/metro.png';
   static String cashCarry = 'assets/images/cash_carry.png';
   static String rahimStore = 'assets/images/rahim_store.png';

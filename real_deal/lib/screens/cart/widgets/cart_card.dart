@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:real_deal/values/category_list.dart';
 
-import '../../../values/assets.dart';
+import '../../../controllers/cart_controller.dart';
+import '../../../models/product_model.dart';
 import '../../../values/custom_colors.dart';
 import '../../../values/shadows.dart';
 import '../../../values/strings.dart';
@@ -11,8 +11,16 @@ class CartCard extends StatelessWidget {
   const CartCard({
     super.key,
     required this.index,
+    required this.controller,
+    required this.product,
+    required this.quantity,
   });
+
   final int index;
+  final CartController controller;
+  final ProductModel product;
+  final int quantity;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +45,7 @@ class CartCard extends StatelessWidget {
                         bottomLeft: Radius.circular(10),
                       ),
                       child: Image.asset(
-                        Assets.redChili,
+                        product.imagePath,
                         height: double.infinity,
                         fit: BoxFit.fitHeight,
                       ),
@@ -49,7 +57,7 @@ class CartCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          Strings.freshRedChili,
+                          product.name,
                           style: Styles.regularInter13(
                             CustomColors.normalTextColor,
                             fontWeight: FontWeight.w600,
@@ -77,8 +85,11 @@ class CartCard extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.remove,
-                                  color: CustomColors.primaryColor),
+                              InkWell(
+                                onTap: () => controller.removeProducts(product),
+                                child: Icon(Icons.remove,
+                                    color: CustomColors.primaryColor),
+                              ),
                               Container(
                                 width: 20,
                                 height: 20,
@@ -92,7 +103,7 @@ class CartCard extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '10',
+                                    '$quantity',
                                     style: Styles.regularInter11(
                                       CustomColors.black,
                                       fontWeight: FontWeight.w700,
@@ -101,7 +112,10 @@ class CartCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Icon(Icons.add, color: CustomColors.primaryColor),
+                              InkWell(
+                                  onTap: () => controller.addProducts(product),
+                                  child: Icon(Icons.add,
+                                      color: CustomColors.primaryColor)),
                             ],
                           ),
                         ),
@@ -116,7 +130,7 @@ class CartCard extends StatelessWidget {
             right: 0,
             child: InkWell(
               onTap: () {
-                // category.removeAt(index);
+                controller.removeWholeProduct(product);
               },
               borderRadius: BorderRadius.circular(10),
               child: Container(

@@ -17,13 +17,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final MainScreenController controller = Get.put(MainScreenController());
-  final PageController _pageController = PageController();
+  // final PageController _pageController = PageController();
 
   @override
   void dispose() {
     super.dispose();
     controller.dispose();
-    _pageController.dispose();
+    // _pageController.dispose();
   }
 
   @override
@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
     // ;
     return Scaffold(
       body: PageView(
-        controller: _pageController,
+        controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
           //!All the screens will go in here
@@ -39,13 +39,13 @@ class _MainScreenState extends State<MainScreen> {
           Container(), // Contents of the second page
           const CartScreen(), // Contents of the Third page
           CategoryScreen(showStore: true), // Contents of the fourth page
-          const ProfileScreen(), // Contents of the fifth page
+          ProfileScreen(), // Contents of the fifth page
           // Add containers for the remaining pages as needed
         ],
       ),
       bottomNavigationBar: BottomNavBar(
         controller: controller,
-        pageController: _pageController,
+        // pageController: controller.pageController,
       ),
     );
   }

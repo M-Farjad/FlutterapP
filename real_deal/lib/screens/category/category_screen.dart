@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_deal/screens/category/widgets/catalog_products.dart';
 
 import '../../values/assets.dart';
 import '../../values/category_list.dart';
@@ -6,7 +7,6 @@ import '../../values/custom_colors.dart';
 import '../../values/strings.dart';
 import '../../widgets/search_field.dart';
 import '../home/widgets/category.dart';
-import '../home/widgets/product_card.dart';
 import 'widgets/stores.dart';
 
 // ignore: must_be_immutable
@@ -32,9 +32,10 @@ class CategoryScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             SizedBox(
-              height: 100,
+              height: 110,
               child: Row(
                 children: [
+                  //!show Store row
                   showStore == true
                       ? CategoryWidget(
                           title: Strings.all,
@@ -60,15 +61,7 @@ class CategoryScreen extends StatelessWidget {
               ),
             ),
             showStore == true ? ShowStores(stores: stores) : const SizedBox(),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: .7),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                itemCount: category.length,
-                itemBuilder: (_, index) => const ProductCard(),
-              ),
-            ),
+            const CatalogProductsGrid(),
           ],
         ),
       ),
