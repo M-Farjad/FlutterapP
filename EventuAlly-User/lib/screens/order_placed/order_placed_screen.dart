@@ -14,7 +14,7 @@ class OrderPlacedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TextAppBar(title: ''),
-      bottomNavigationBar: const CustomBottomNabBar(),
+      // bottomNavigationBar: const CustomBottomNabBar(),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Get.width * .06),
@@ -40,7 +40,7 @@ class OrderPlacedScreen extends StatelessWidget {
               Text(
                 'Your order number is : 123456',
                 style: TextStyle(
-                  color: const Color(0xFF555454),
+                  color: Color(constant.lightGrey),
                   fontSize: 18,
                   fontFamily: constant.font,
                   fontWeight: FontWeight.w800,
@@ -53,7 +53,7 @@ class OrderPlacedScreen extends StatelessWidget {
                   'Your order has been placed successfully and you are one step closer to making your dream event a reality.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: const Color(0xFF555454),
+                    color: Color(constant.lightGrey),
                     fontSize: 12,
                     fontFamily: constant.font,
                     fontWeight: FontWeight.w500,

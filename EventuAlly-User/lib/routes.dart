@@ -16,4 +16,11 @@ class NamedRoutes {
   static String chatScreen = '/chat_screen';
   static String orderCancellation = '/order_cancellation';
   static String orderFeedBack = '/order_feedback';
+  static String verifyOrder = '/verify_order';
+  static String verifiedOrder = '/verified_order';
+  static String review = '/review';
+  static String locations = '/locations';
+  static String settings = '/settings';
+  static String drawer = '/drawer';
+  static String vendorScreen = '/vendor_page';
 }

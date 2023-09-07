@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TextAppBar(title: 'My Cart'),
-      bottomNavigationBar: const CustomBottomNabBar(),
+      // bottomNavigationBar: const CustomBottomNabBar(),
       body: Column(
         children: [
           const CustomStepper(
@@ -58,7 +58,7 @@ class CartScreen extends StatelessWidget {
                     'All Items',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: const Color(0xFF555454),
+                      color: Color(constant.lightGrey),
                       fontSize: 16,
                       fontFamily: constant.font,
                       fontWeight: FontWeight.w500,

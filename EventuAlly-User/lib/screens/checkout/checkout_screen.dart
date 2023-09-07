@@ -16,7 +16,7 @@ class CheckOutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TextAppBar(title: 'Checkout(1)'),
-      bottomNavigationBar: const CustomBottomNabBar(),
+      // bottomNavigationBar: const CustomBottomNabBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -58,7 +58,7 @@ class CheckOutScreen extends StatelessWidget {
                       Text(
                         'Choose a payment method',
                         style: TextStyle(
-                          color: const Color(0xFF555454),
+                          color: Color(constant.lightGrey),
                           fontSize: 12,
                           fontFamily: constant.font,
                           fontWeight: FontWeight.w400,
@@ -158,7 +158,7 @@ class CheckOutScreen extends StatelessWidget {
                             'House# 12/98 XYZ Building, Latifabad Hyd.',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -184,7 +184,7 @@ class CheckOutScreen extends StatelessWidget {
                           Text(
                             'Add another location',
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -230,7 +230,7 @@ class CheckOutScreen extends StatelessWidget {
                           Text(
                             'Cost',
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w600,
@@ -241,7 +241,7 @@ class CheckOutScreen extends StatelessWidget {
                             '50,000',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -256,7 +256,7 @@ class CheckOutScreen extends StatelessWidget {
                           Text(
                             'Discount',
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w600,
@@ -267,7 +267,7 @@ class CheckOutScreen extends StatelessWidget {
                             '-',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -282,7 +282,7 @@ class CheckOutScreen extends StatelessWidget {
                           Text(
                             'Advance (20 %)',
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w600,
@@ -293,7 +293,7 @@ class CheckOutScreen extends StatelessWidget {
                             '10,000',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -308,7 +308,7 @@ class CheckOutScreen extends StatelessWidget {
                           Text(
                             'Delivery',
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w600,
@@ -319,7 +319,7 @@ class CheckOutScreen extends StatelessWidget {
                             '250',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 12,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w500,
@@ -345,7 +345,7 @@ class CheckOutScreen extends StatelessWidget {
                             'Rs 10,250',
                             textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: const Color(0xFF555454),
+                              color: Color(constant.lightGrey),
                               fontSize: 18,
                               fontFamily: constant.font,
                               fontWeight: FontWeight.w700,

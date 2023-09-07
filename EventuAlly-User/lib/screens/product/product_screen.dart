@@ -36,7 +36,6 @@ class _ProductScreenState extends State<ProductScreen> {
     elevation: 8,
     shape: RoundedRectangleBorder(
       side: BorderSide(
-        width: 0.50,
         color: Color(constant.red),
       ),
       borderRadius: BorderRadius.circular(8),
@@ -46,7 +45,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNabBar(),
+      // bottomNavigationBar: const CustomBottomNabBar(),
       appBar: const TextAppBar(title: ''),
       body: SafeArea(
         child: Container(
@@ -58,7 +57,9 @@ class _ProductScreenState extends State<ProductScreen> {
                 SizedBox(height: Get.height * .02),
                 const ProductTitleText(),
                 SizedBox(height: Get.height * .02),
-                const ProductCategories(),
+                const ProductDescription(
+                    description:
+                        'Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard. Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard.'),
                 SizedBox(height: Get.height * .01),
                 const PriceAndPeopleText(),
                 Row(
@@ -67,7 +68,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     Text(
                       '50,000 Rs',
                       style: TextStyle(
-                        color: const Color(0xFF555454),
+                        color: Color(constant.lightGrey),
                         fontSize: 24,
                         fontFamily: constant.font,
                         fontWeight: FontWeight.w700,
@@ -82,7 +83,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     Text(
                       'Select a date',
                       style: TextStyle(
-                        color: const Color(0xFF555454),
+                        color: Color(constant.lightGrey),
                         fontSize: 14,
                         fontFamily: constant.font,
                         fontWeight: FontWeight.w700,
@@ -231,7 +232,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       'Select a location',
                       textAlign: TextAlign.justify,
                       style: TextStyle(
-                        color: const Color(0xFF555454),
+                        color: Color(constant.lightGrey),
                         fontSize: 14,
                         fontFamily: constant.font,
                         fontWeight: FontWeight.w700,
@@ -281,7 +282,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       'Select a Duration',
                       textAlign: TextAlign.justify,
                       style: TextStyle(
-                        color: const Color(0xFF555454),
+                        color: Color(constant.lightGrey),
                         fontSize: 14,
                         fontFamily: constant.font,
                         fontWeight: FontWeight.w700,

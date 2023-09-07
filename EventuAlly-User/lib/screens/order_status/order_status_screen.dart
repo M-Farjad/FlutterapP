@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../../controllers/order_pic_controller.dart';
+import '../../routes.dart';
 import '../../widget/price_people_text.dart';
 import '../../widget/product_categories.dart';
 import '../../widget/product_image_view.dart';
@@ -50,7 +51,9 @@ class OrderStatusScreen extends StatelessWidget {
               const ProductTitleText(),
               Text('Order Number: 098765', style: kRedTextStyle),
               SizedBox(height: Get.height * .015),
-              const ProductCategories(),
+              const ProductDescription(
+                  description:
+                      'Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard. Biryani, Qorma, Kheer, Kabab, Gulab Jamun, Pulao, Chapati, Naan, Broast & Custard.'),
               SizedBox(height: Get.height * .015),
               const PriceAndPeopleText(),
               Row(
@@ -60,7 +63,7 @@ class OrderStatusScreen extends StatelessWidget {
                     '50,000 Rs',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      color: const Color(0xFF555454),
+                      color: Color(constant.lightGrey),
                       fontSize: 24,
                       fontFamily: constant.font,
                       fontWeight: FontWeight.w700,
@@ -70,7 +73,7 @@ class OrderStatusScreen extends StatelessWidget {
                     '100',
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      color: const Color(0xFF555454),
+                      color: Color(constant.lightGrey),
                       fontSize: 24,
                       fontFamily: constant.font,
                       fontWeight: FontWeight.w700,
@@ -82,23 +85,27 @@ class OrderStatusScreen extends StatelessWidget {
               const OrderDate(),
               const OrderLocation(),
               const OrderDuration(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Order Completed? Verify here',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF555454),
-                      fontSize: 10.52,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w800,
+                  Flexible(
+                    child: Text(
+                      'Order Completed? Verify here',
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(constant.lightGrey),
+                        fontSize: 10.52,
+                        fontFamily: constant.font,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                   ActionButton(
-                    onTap: () {},
+                    onTap: () => Get.toNamed(NamedRoutes.verifyOrder),
                     color: Color(constant.green),
-                    text: 'Varify',
+                    text: 'Verify',
                   )
                 ],
               )

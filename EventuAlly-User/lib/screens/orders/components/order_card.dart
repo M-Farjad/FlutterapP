@@ -77,7 +77,7 @@ class OrderCard extends StatelessWidget {
                                 'Date : 21-05-2023',
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                  color: const Color(0xFF555454),
+                                  color: Color(constant.lightGrey),
                                   fontSize: 8,
                                   fontFamily: constant.font,
                                   fontWeight: FontWeight.w700,
@@ -87,7 +87,7 @@ class OrderCard extends StatelessWidget {
                                 'Location : XYZ building XYZ block, Latifabad, Hyd.',
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                  color: const Color(0xFF555454),
+                                  color: Color(constant.lightGrey),
                                   fontSize: 8,
                                   fontFamily: constant.font,
                                   fontWeight: FontWeight.w700,
