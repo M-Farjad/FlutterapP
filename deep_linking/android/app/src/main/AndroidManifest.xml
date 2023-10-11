@@ -24,13 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <!-- Deep Linking Start -->
-            <meta-data android:name="flutter_deeplinking_enabled" android:value="true"/>
+            
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
             <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.View"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="http" android:host="deals-reals.vercel.app" android:pathPattern="/.."/>
-                <data android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="driver.livroute.online" />
+                <data android:scheme="https" android:host="driver.livroute.online" />
             </intent-filter>
             <!-- Deep Linking End -->
         </activity>
