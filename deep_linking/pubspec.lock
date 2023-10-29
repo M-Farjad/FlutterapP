@@ -62,6 +62,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_deep_linking:
+    dependency: "direct main"
+    description:
+      name: flutter_deep_linking
+      sha256: fd6e78c903d8927673cdbc093bd2a3edfef95f29b199b58ec844a2566cfb4186
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   flutter_lints:
     dependency: "direct dev"
     description:

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/cart_list.dart';
-import '../widgets/total_calculate.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -35,12 +34,7 @@ class _CartScreenState extends State<CartScreen> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          CartList(height: height, width: width),
-          TotalCalculate(height: height, width: width),
-        ],
-      ),
+      body: CartList(height: height, width: width),
     );
   }
 }

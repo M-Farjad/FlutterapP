@@ -1,9 +1,10 @@
+import 'dart:convert';
+
 import 'package:bakery_app/Model/bakeryItem.dart';
-import 'package:bakery_app/dummyData/ItemsData.dart';
 import 'package:bakery_app/providers/CategoryItems.dart';
-import 'package:bakery_app/providers/bakeryItems.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 import '../providers/favoriteItems.dart';
 import '../screens/detail_screen.dart';
@@ -18,6 +19,42 @@ class ItemsList extends ConsumerStatefulWidget {
 }
 
 class _ItemsListState extends ConsumerState<ItemsList> {
+  List<BakeryItem> cartItems = [];
+  void checkCartItems() async {
+    final url = Uri.https(
+      'bakery-app-b667d-default-rtdb.firebaseio.com',
+      'cart_list.json',
+    );
+
+    final response = await http.get(
+      url,
+    );
+
+    final Map<String, dynamic>? listdata = json.decode(response.body);
+    print(listdata);
+    final List<BakeryItem> loadedItems = [];
+    if (listdata != null) {
+      for (final items in listdata.entries) {
+        loadedItems.add(BakeryItem(
+            pid: items.value['id'],
+            name: items.value['name'],
+            id: items.key,
+            price: int.parse(items.value['price']),
+            flavore: items.value['flavour'],
+            desc: '',
+            ratedStar: items.value['quantity'],
+            image: items.value['image'],
+            isCreamy: true,
+            isChocolate: true,
+            Title: ''));
+      }
+
+      setState(() {
+        cartItems = loadedItems;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<BakeryItem> categoryItems = ref.watch(CategoryItemsProvider);
@@ -45,7 +82,9 @@ class _ItemsListState extends ConsumerState<ItemsList> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return DetailScreen(item: categoryItems[index]);
+                            return DetailScreen(
+                                item: categoryItems[index],
+                                cartItems: cartItems);
                           },
                         ),
                       );
@@ -75,7 +114,10 @@ class _ItemsListState extends ConsumerState<ItemsList> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return DetailScreen(item: categoryItems[index]);
+                            return DetailScreen(
+                              item: categoryItems[index],
+                              cartItems: cartItems,
+                            );
                           },
                         ),
                       );
@@ -87,7 +129,10 @@ class _ItemsListState extends ConsumerState<ItemsList> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) {
-                                return DetailScreen(item: categoryItems[index]);
+                                return DetailScreen(
+                                  item: categoryItems[index],
+                                  cartItems: cartItems,
+                                );
                               },
                             ),
                           );
@@ -215,8 +260,3 @@ class _ItemsListState extends ConsumerState<ItemsList> {
     );
   }
 }
-
-
-//     return 
-//   }
-// }

@@ -1,28 +1,60 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileScreen extends StatelessWidget {
+  ProfileScreen({super.key});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
+  final profile = Get.parameters['id'] ?? 'No Profile Given';
 
-class _ProfileScreenState extends State<ProfileScreen> {
+  // @override
+  // void initState() {
+  //   // final productId = Get.parameters['id'] ?? 'No Profile Given';
+  //   // now fetch data from api ...
+  //   // reload screen . to show updated data
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final profile = Get.parameters['profile'] ?? 'No Profile Given';
-
+    log("ProfileScreen.build");
     return Scaffold(
-        appBar: AppBar(),
-        body: Column(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            log("GET.previous Route ${Get.previousRoute}");
+            if (Get.previousRoute.isEmpty) {
+              Get.offAndToNamed("/");
+            } else {
+              Get.back();
+            }
+          },
+        ),
+      ),
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Text(profile),
-            )
+            ),
+            TextButton(
+              child: const Text("Go to Cart"),
+              onPressed: () {
+                Get.toNamed('/cart');
+              },
+            ),
+            TextButton(
+              child: const Text("Go to Home"),
+              onPressed: () {
+                Get.offAllNamed('/');
+              },
+            ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

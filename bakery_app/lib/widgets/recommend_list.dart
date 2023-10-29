@@ -1,10 +1,8 @@
-import 'package:bakery_app/dummyData/ItemsData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Model/bakeryItem.dart';
 import '../providers/CategoryItems.dart';
-import '../providers/bakeryItems.dart';
 import '../screens/detail_screen.dart';
 
 class RecommendList extends ConsumerStatefulWidget {
@@ -43,6 +41,7 @@ class _RecommendListState extends ConsumerState<RecommendList> {
                             builder: (context) {
                               return DetailScreen(
                                 item: categoryItems[index],
+                                cartItems: [],
                               );
                             },
                           ),
@@ -75,8 +74,7 @@ class _RecommendListState extends ConsumerState<RecommendList> {
                           MaterialPageRoute(
                             builder: (context) {
                               return DetailScreen(
-                                item: categoryItems[index],
-                              );
+                                  item: categoryItems[index], cartItems: []);
                             },
                           ),
                         );

@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:bakery_app/providers/cartItems.dart';
-import 'package:bakery_app/providers/quantity.dart';
 //import 'package:bakery_app/providers/favoriteItems.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,68 +10,104 @@ import 'package:http/http.dart' as http;
 import '../Model/bakeryItem.dart';
 import '../providers/favoriteItems.dart';
 
-class DetailScreen extends ConsumerWidget {
-  const DetailScreen({super.key, required this.item});
+class DetailScreen extends ConsumerStatefulWidget {
+  const DetailScreen({
+    super.key,
+    required this.item,
+    required this.cartItems,
+  });
 
   final BakeryItem item;
+  final List<BakeryItem> cartItems;
+  @override
+  ConsumerState<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends ConsumerState<DetailScreen> {
+  int Val = 1;
+  int Itemindex = 0;
+  bool IsInCart = false;
+
+  List<BakeryItem> CartItems = [];
+  @override
+  void initState() {
+    super.initState();
+    IsInCart = widget.cartItems.any(
+      (element) => element.id == widget.item.id,
+    );
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    int Val = 1;
+  Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
-    List<BakeryItem> FavoriteItems = ref.watch(FavoriteItemProvider);
-    final CartItems = ref.watch(CartItemProvider);
-
-    bool checkVal(dynamic item, List<Map<String, dynamic>> CartItems) {
-      for (var element in CartItems) {
-        if (element.containsValue(item)) return true;
-      }
-      return false;
-    }
-
-    bool IsInCart = checkVal(item, CartItems);
-
     void updateCart() async {
-      ref.read(CartItemProvider.notifier).updateCart(Val, item);
-
       try {
-        final url = Uri.https(
-          'bakery-app-b667d-default-rtdb.firebaseio.com',
-          'cart_list.json',
-        );
-        final response = await http.post(
-          url,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: json.encode({
-            'id': item.id,
-            'name': item.name,
-            'price': item.price.toString(),
-            'flavour': item.flavore,
-            'image': item.image,
-            'quantity': Val.toString()
-          }),
-        );
-        log(url.toString());
-        if (!context.mounted) return;
+        log(IsInCart.toString());
+        if (!IsInCart) {
+          final url = Uri.https(
+            'bakery-app-b667d-default-rtdb.firebaseio.com',
+            'cart_list.json',
+          );
+          final response = await http.post(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: json.encode({
+              'id': widget.item.id,
+              'name': widget.item.name,
+              'price': widget.item.price.toString(),
+              'flavour': widget.item.flavore,
+              'image': widget.item.image,
+              'quantity': Val,
+            }),
+          );
+          if (!context.mounted) return;
+          if (response.statusCode == 200) {
+            // Successfully posted data
+            log('${response.body} Item added successfully.');
+            setState(() {
+              IsInCart = true;
+            });
+            // Handle the response as needed
+          } else {
+            // Handle other status codes if needed
+            throw Exception(
+                'HTTP request failed with status: ${response.statusCode}');
+          }
+        } else if (IsInCart) {
+          final url = Uri.https(
+            'bakery-app-b667d-default-rtdb.firebaseio.com',
+            'cart_list/${CartItems[Itemindex].id}.json',
+          );
+          final response = await http.delete(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          );
 
-        if (response.statusCode == 200) {
-          // Successfully posted data
-          log(response.body);
-          // Handle the response as needed
-        } else {
-          // Handle other status codes if needed
-          throw Exception(
-              'HTTP request failed with status: ${response.statusCode}');
+          if (response.statusCode == 200) {
+            // Successfully deleted the item.
+            log(response.body);
+            log('Item deleted successfully.');
+            setState(() {
+              IsInCart = false;
+            });
+          } else {
+            // Handle the error or non-200 response here.
+            log('Failed to delete item. Status code: ${response.statusCode}');
+          }
         }
       } catch (e) {
         // Handle the exception
         log('An error occurred: $e');
       }
     }
+
+    List<BakeryItem> FavoriteItems = ref.watch(FavoriteItemProvider);
 
     return Scaffold(
       body: Container(
@@ -109,14 +143,14 @@ class DetailScreen extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Hero(
-                      tag: item.image,
+                      tag: widget.item.image,
                       child: Container(
                         height: height / 2,
                         width: width,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                              item.image,
+                              widget.item.image,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -133,12 +167,12 @@ class DetailScreen extends ConsumerWidget {
                               onPressed: () {
                                 ref
                                     .read(FavoriteItemProvider.notifier)
-                                    .updateFavorite(item);
+                                    .updateFavorite(widget.item);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Icon(
-                                  FavoriteItems.contains(item)
+                                  FavoriteItems.contains(widget.item)
                                       ? Icons.favorite
                                       : Icons.favorite_border,
                                   size: 22,
@@ -157,7 +191,7 @@ class DetailScreen extends ConsumerWidget {
                     SizedBox(
                       height: 15,
                     ),
-                    Text(item.name),
+                    Text(widget.item.name),
                     SizedBox(
                       height: 10,
                     ),
@@ -165,15 +199,17 @@ class DetailScreen extends ConsumerWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          for (int i = 1; i <= item.ratedStar; i++)
+                          for (int i = 1; i <= widget.item.ratedStar; i++)
                             Icon(
                               Icons.star,
                               color: const Color.fromARGB(255, 192, 117, 4),
                             ),
-                          if (item.ratedStar < 5)
+                          if (widget.item.ratedStar < 5)
                             Row(
                               children: [
-                                for (int i = item.ratedStar; i <= 5; i++)
+                                for (int i = widget.item.ratedStar + 1;
+                                    i <= 5;
+                                    i++)
                                   Icon(
                                     Icons.star,
                                     color: Colors.grey,
@@ -184,15 +220,18 @@ class DetailScreen extends ConsumerWidget {
                             width: 5,
                           ),
                           Text(
-                            item.ratedStar.toString(),
+                            widget.item.ratedStar.toString(),
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                           Spacer(),
                           InkWell(
                             onTap: () {
-                              Val--;
-                              if (Val < 0) return;
+                              setState(() {
+                                if (Val > 1) {
+                                  Val--;
+                                }
+                              });
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -225,10 +264,9 @@ class DetailScreen extends ConsumerWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Val++;
-                              ref
-                                  .read(quantityProvider.notifier)
-                                  .updateQuantity(Val);
+                              setState(() {
+                                Val++;
+                              });
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -255,7 +293,7 @@ class DetailScreen extends ConsumerWidget {
                           alignment: Alignment.topLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 18, top: 2),
-                            child: Text(item.desc),
+                            child: Text(widget.item.desc),
                           )),
                     )),
                     Container(
@@ -277,6 +315,8 @@ class DetailScreen extends ConsumerWidget {
                               padding: const EdgeInsets.all(18),
                               child: Text(
                                 IsInCart ? 'Remove from Cart' : 'Add to Cart',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                                 style: TextStyle(
                                     color: Colors.pink,
                                     fontSize: 18,
@@ -284,14 +324,15 @@ class DetailScreen extends ConsumerWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 60),
+                          Expanded(
                             child: ElevatedButton(
                               onPressed: () {},
                               child: Padding(
                                 padding: const EdgeInsets.all(8),
                                 child: Text(
-                                  '250.40',
+                                  'Rs: 250.40',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
