@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w#1b4v5rnfq3!wkbaxw#8jcdiwt2!@l58i)$&m$#@$4e5)43m+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.10.6', 'localhost'] # Add the IP address of the server here using ipconfig command
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'python_project'
+    'python_project',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
