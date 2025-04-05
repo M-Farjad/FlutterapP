@@ -1,16 +1,8 @@
-# flutter_php_mysql_app
+place the flutter_php_mysql_backend_api folder in the htdocs folder of the xampp
 
-A new Flutter project.
+then start the Apache server and mysql
 
-## Getting Started
+create db flutter_php_mysql_db
+create table users
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+run this app
